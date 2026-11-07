@@ -1,0 +1,65 @@
+<!--
+  Contact Form 7 — form "Tư vấn website"
+  Dán phần dưới vào tab "Form" của Contact Form 7.
+  CSS đã có sẵn trong theme (.nlw-form ...), không cần thêm style.
+  Bọc ngoài bằng shortcode [nlw_contact_form][contact-form-7 id="..."][/nlw_contact_form].
+-->
+
+<div class="nlw-two">
+  <p>
+    <label for="ten">Họ và tên</label>
+    [text* ten id:ten placeholder "Nguyễn Văn A"]
+  </p>
+  <p>
+    <label for="sdt">Số điện thoại / Zalo</label>
+    [tel* sdt id:sdt placeholder "09xx xxx xxx"]
+  </p>
+</div>
+
+<p>
+  <label for="email">Email (không bắt buộc)</label>
+  [email email id:email placeholder "ban@email.com"]
+</p>
+
+<p>
+  <label for="dichvu">Dịch vụ quan tâm</label>
+  [select dichvu id:dichvu "Chưa xác định" "Website theo yêu cầu" "Website bán hàng" "Website doanh nghiệp" "Landing Page"]
+</p>
+
+<p>
+  <label for="noidung">Bạn cần gì?</label>
+  [textarea noidung id:noidung placeholder "Mô tả ngắn về website bạn muốn làm, lĩnh vực kinh doanh…"]
+</p>
+
+[submit "Gửi thông tin"]
+
+
+<!--
+  ===== Tab "Mail" =====
+  Tiêu đề:  [ten] cần tư vấn website — namtrandang.com
+  Từ:       namtrandang.com <wordpress@namtrandang.com>
+  Đến:      (email nhận lead)
+  Reply-To: [email]
+  Nội dung:
+    Họ tên: [ten]
+    Điện thoại/Zalo: [sdt]
+    Email: [email]
+    Dịch vụ quan tâm: [dichvu]
+    Nội dung: [noidung]
+    ---
+    Gửi từ [_url] lúc [_date] [_time]
+
+  ===== Tab "Messages" (đổi sang tiếng Việt) =====
+  Gửi thành công:        Đã nhận thông tin. Tôi sẽ liên hệ lại với bạn sớm nhất.
+  Gửi thất bại:          Gửi chưa được. Bạn nhắn Zalo giúp tôi nhé.
+  Trường bắt buộc trống: Vui lòng điền thông tin này.
+  Số điện thoại sai:     Số điện thoại chưa đúng định dạng.
+  Email sai:             Email chưa đúng định dạng.
+
+  ===== Lưu ý =====
+  - Bật reCAPTCHA v3 hoặc Akismet để chặn spam.
+  - Nên cài một plugin SMTP (FluentSMTP / WP Mail SMTP) để email không rơi vào spam.
+  - Handoff yêu cầu bắt buộc: Họ tên + (Số điện thoại HOẶC Email). CF7 không có
+    điều kiện "hoặc"; ở trên đang bắt buộc Họ tên và Số điện thoại — đơn giản và
+    đúng thực tế vì kênh chính là Zalo.
+-->

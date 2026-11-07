@@ -1,0 +1,247 @@
+/* =========================================================================
+   Nam làm WEB — Chế độ nền tối "Aura"
+
+   Nạp SAU theme.css. Muốn tắt chế độ tối: bỏ dòng enqueue 'nlw-dark'
+   trong inc/setup.php — theme.css giữ nguyên bản sáng, không mất gì.
+
+   Nền gồm 3 lớp như bản gốc, nhưng đổi sang bảng màu thương hiệu:
+     nền   #002735 (brand-900)  thay cho #100e0b
+     đốm   #6BDFEE (accent)     thay cho #5FA8F7
+     quầng #027EA6 + #6BDFEE    thay cho #4094ED + #55C1F7
+
+   Khác bản gốc một điểm: KHÔNG dùng filter: blur(). Trang này có 2 section
+   scroll-driven; blur 180px trên lớp phủ toàn màn hình khiến trình duyệt vẽ
+   lại mỗi khung hình và gây giật. Dùng radial-gradient mềm sẵn cho kết quả
+   thị giác gần như y hệt mà không tốn chi phí đó.
+   ====================================================================== */
+
+/* -------------------------------------------------------------------------
+   1. Nền và 3 lớp aura
+   ---------------------------------------------------------------------- */
+
+body.nlw {
+  background-color: var(--brand-900);
+  color: var(--text);
+}
+
+/* Lớp 2 + 3: hai quầng sáng. position:fixed để đứng yên khi cuộn. */
+body.nlw::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 40% 38%, rgba(2, 126, 166, 0.55) 0%, rgba(2, 126, 166, 0) 55%),
+    radial-gradient(circle at 72% 68%, rgba(107, 223, 238, 0.28) 0%, rgba(107, 223, 238, 0) 45%);
+  mix-blend-mode: screen;
+}
+
+/* Lớp 1: lưới chấm */
+body.nlw::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(107, 223, 238, 0.16) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Nội dung luôn nằm trên các lớp nền */
+body.nlw #header,
+body.nlw #content,
+body.nlw #footer,
+body.nlw .nlw-float {
+  position: relative;
+  z-index: 1;
+}
+
+/* -------------------------------------------------------------------------
+   2. Token đổi nghĩa cho nền tối
+   ---------------------------------------------------------------------- */
+
+body.nlw {
+  --surface: #06303F;
+  --surface-alt: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.14);
+  --text: #D7E5EB;
+  --text-muted: #9DB6C0;
+  /* Link và nhãn eyebrow phải sáng lên mới đọc được trên nền tối */
+  --accent-text: #6BDFEE;
+}
+
+/* -------------------------------------------------------------------------
+   3. Section: bỏ nền đặc để lộ lớp aura
+   ---------------------------------------------------------------------- */
+
+body.nlw .nlw-alt,
+body.nlw .nlw-values,
+body.nlw .nlw-values.is-light,
+body.nlw .nlw-vision,
+body.nlw .nlw-pjx,
+body.nlw .nlw-proc,
+body.nlw .nlw-ft,
+body.nlw .nlw-services-hub {
+  background: transparent;
+}
+
+/* Dải CTA giữ nền đặc — đây là điểm nhấn chuyển đổi, cần nổi khỏi nền */
+body.nlw .nlw-cta {
+  background: linear-gradient(180deg, var(--brand-500) 0%, #013E56 100%);
+}
+
+/* -------------------------------------------------------------------------
+   4. Chữ
+   ---------------------------------------------------------------------- */
+
+body.nlw :where(h1, h2, h3, h4, h5) { color: #FFFFFF; }
+
+body.nlw a { color: var(--accent); }
+body.nlw a:hover { color: #FFFFFF; }
+
+body.nlw .nlw-quote,
+body.nlw .nlw-qlist li,
+body.nlw .nlw-tier-name,
+body.nlw .nlw-meta-v,
+body.nlw .nlw-chan-alt b,
+body.nlw .nlw-schip,
+body.nlw .nlw-col-h,
+body.nlw .nlw-ocard-nm,
+body.nlw .nlw-res b,
+body.nlw .nlw-active-filter b,
+body.nlw .nlw-pcard-info b,
+body.nlw .nlw-rp-meta b,
+body.nlw .nlw-feats li,
+body.nlw .nlw-chip { color: #FFFFFF; }
+
+body.nlw .nlw-intro-side,
+body.nlw .nlw-eyebrow { color: var(--accent); }
+
+body.nlw .nlw-values.is-light h2,
+body.nlw .nlw-values.is-light .nlw-v h4 { color: #FFFFFF; }
+body.nlw .nlw-values.is-light .nlw-eyebrow { color: var(--accent); }
+body.nlw .nlw-values.is-light .nlw-v-n { color: var(--accent); }
+body.nlw .nlw-values.is-light .nlw-v p { color: var(--on-dark-muted); }
+
+body.nlw .nlw-more,
+body.nlw .nlw-ocard-go,
+body.nlw .nlw-ocard-fr b,
+body.nlw .nlw-way-s,
+body.nlw .nlw-tl-sub { color: var(--accent); }
+
+body.nlw .nlw-vrow-n,
+body.nlw .nlw-card-no,
+body.nlw .nlw-ocard-n,
+body.nlw .nlw-rsv-no { color: rgba(107, 223, 238, 0.45); }
+
+/* -------------------------------------------------------------------------
+   5. Bề mặt thẻ
+   ---------------------------------------------------------------------- */
+
+body.nlw .nlw-card,
+body.nlw .nlw-tier,
+body.nlw .nlw-pcard,
+body.nlw .nlw-rp,
+body.nlw .nlw-rpj a,
+body.nlw .nlw-rsv a,
+body.nlw .nlw-ocard,
+body.nlw .nlw-chip,
+body.nlw .nlw-chan-alt,
+body.nlw .nlw-values.is-light .nlw-v,
+body.nlw .nlw-form {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: var(--border);
+}
+
+body.nlw .nlw-values.is-light .nlw-vgrid {
+  background: var(--border);
+  border-color: var(--border);
+}
+
+body.nlw .nlw-card:hover,
+body.nlw .nlw-pcard:hover,
+body.nlw .nlw-rp:hover,
+body.nlw .nlw-ocard:hover,
+body.nlw .nlw-rpj a:hover,
+body.nlw .nlw-rsv a:hover {
+  background: rgba(255, 255, 255, 0.075);
+  border-color: rgba(107, 223, 238, 0.45);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Ô icon và ô tích: nền brand-50 quá sáng trên nền tối */
+body.nlw .nlw-card-ico,
+body.nlw .nlw-ck,
+body.nlw .nlw-chan-alt .nlw-chan-ico,
+body.nlw .nlw-values.is-light .nlw-v-ico {
+  background: rgba(107, 223, 238, 0.14);
+}
+body.nlw .nlw-card-ico .nlw-ic,
+body.nlw .nlw-ck .nlw-ic,
+body.nlw .nlw-chan-alt .nlw-chan-ico .nlw-ic,
+body.nlw .nlw-values.is-light .nlw-v-ico .nlw-ic { background: var(--accent); }
+
+body.nlw .nlw-dur { background: rgba(255, 255, 255, 0.06); }
+
+/* Ảnh chưa có: sọc chéo phải tối lại cho hợp nền */
+body.nlw .nlw-shot {
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0 16px, rgba(255, 255, 255, 0.07) 16px 32px);
+  color: rgba(255, 255, 255, 0.4);
+}
+body.nlw .nlw-shot-has { background: none; }
+body.nlw .nlw-map { background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0 18px, rgba(255, 255, 255, 0.07) 18px 36px); }
+
+/* -------------------------------------------------------------------------
+   6. Header, footer, nút, form
+   ---------------------------------------------------------------------- */
+
+body.nlw #header .header-wrapper {
+  background: rgba(0, 39, 53, 0.88);
+  border-bottom-color: var(--border);
+}
+body.nlw #header .header-nav > li > a { color: var(--text); }
+body.nlw #header .header-nav > li > a:hover { color: var(--accent); }
+body.nlw #header .header-nav > li.current-menu-item > a,
+body.nlw #header .header-nav > li.current-menu-parent > a,
+body.nlw #header .header-nav > li.active > a {
+  color: #FFFFFF;
+  border-bottom-color: var(--accent);
+}
+
+body.nlw .nlw-btn-ghost { border-color: var(--border); color: #FFFFFF; }
+body.nlw .nlw-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+body.nlw .nlw-fchip { color: var(--text-muted); border-color: var(--border); }
+body.nlw .nlw-fchip:hover { border-color: var(--accent); color: var(--accent); }
+body.nlw .nlw-fchip.is-on { background: var(--brand-500); border-color: var(--brand-500); color: #fff; }
+
+body.nlw .nlw-pager .nlw-pg,
+body.nlw .nlw-pager span.nlw-pg {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+body.nlw .nlw-pager .nlw-pg.is-on { background: var(--brand-500); border-color: var(--brand-500); color: #fff; }
+
+body.nlw .nlw-form input[type="text"],
+body.nlw .nlw-form input[type="tel"],
+body.nlw .nlw-form input[type="email"],
+body.nlw .nlw-form select,
+body.nlw .nlw-form textarea {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: var(--border);
+  color: var(--text);
+}
+body.nlw .nlw-form label { color: #FFFFFF; }
+body.nlw .nlw-form input::placeholder,
+body.nlw .nlw-form textarea::placeholder { color: rgba(255, 255, 255, 0.38); }
+
+/* Đường kẻ ngang giữa các hàng danh sách */
+body.nlw .nlw-vlist,
+body.nlw .nlw-vrow,
+body.nlw .nlw-meta-inline,
+body.nlw .nlw-blurb { border-color: var(--border); }
+
+/* Timeline quy trình: nền section đã trong suốt, node phải có nền riêng */
+body.nlw .nlw-tl-node { background: #01303F; }

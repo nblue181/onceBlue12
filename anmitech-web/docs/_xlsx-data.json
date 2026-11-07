@@ -1,0 +1,80 @@
+{
+  "file": "D:\\NBLUE\\anmitech-web\\docs\\KE-HOACH-ANMITECH.xlsx",
+  "statuses": ["Chưa làm", "Đang làm", "Xong", "Bỏ qua"],
+  "doneValue": "Xong",
+  "activeValue": "Đang làm",
+  "sheets": [
+    {
+      "name": "Việc làm trước",
+      "title": "ANMITECH — Việc cần làm trước (Founder)",
+      "note": "Xong nhóm A là Claude bắt đầu code được ngay. Nhóm B chạy song song, cần trước khi dựng trang chủ.",
+      "headers": ["Mã", "Việc cần làm", "Thời gian", "Trạng thái", "Cách biết là xong"],
+      "widths": [7, 52, 12, 14, 56],
+      "wrap": [false, true, false, false, true],
+      "statusCol": 4,
+      "rows": [
+        ["A1", "Cài Node.js LTS — tải ở nodejs.org, cài xong mở lại terminal", "5 phút", "Chưa làm", "Chạy: node --version → ra số phiên bản. ĐÂY LÀ CHẶN CỨNG toàn bộ frontend."],
+        ["A2", "Chốt font chữ cho anmitech.vn", "—", "Chưa làm", "Có tên font cụ thể, hỗ trợ đủ dấu tiếng Việt. Hiện để tạm Be Vietnam Pro."],
+        ["A3", "Trả lời: Anmitech khác Nam làm WEB ở chỗ nào", "—", "Chưa làm", "Có danh sách trang muốn có + khách hàng mục tiêu + phạm vi dịch vụ."],
+        ["B1", "Import 4 file JSON vào WordPress theo đúng thứ tự 01 → 02 → 03 → 04", "10 phút", "Chưa làm", "Menu trái wp-admin có: Dịch vụ, Dự án, Anmitech. File ở D:\\NBLUE\\anmitech-web\\wp-import\\"],
+        ["B2", "Settings → Permalinks → Post name → Save Changes", "1 phút", "Chưa làm", "Phải bấm Save kể cả khi đã đúng — mới nạp rewrite rule cho /dich-vu/ và /du-an/."],
+        ["B3", "Cài plugin Code Snippets, dán snippet-rest.php", "5 phút", "Chưa làm", "Mở /wp-json/anmitech/v1/home → JSON có 3 khoá options, services, projects."],
+        ["B4", "Nhập nội dung thật: tối thiểu 3 Dịch vụ + 2 Dự án + trang Cấu hình", "2–3 giờ", "Chưa làm", "CHỈ nội dung và số liệu có thật. Để trống còn hơn bịa."],
+        ["C1", "Chặn Google index anmitech.namtrandang.com", "5 phút", "Chưa làm", "cPanel → Directory Privacy đặt mật khẩu. Tránh trùng nội dung với anmitech.vn sau này."],
+        ["C2", "Cài Rank Math (làm lúc nào cũng được, trước bước SEO)", "10 phút", "Chưa làm", "Sau đó dán snippet-rankmath.php và xác minh meta key."]
+      ]
+    },
+    {
+      "name": "Toàn bộ đầu việc",
+      "title": "ANMITECH — 18 đầu việc, từ dữ liệu WordPress tới bàn giao",
+      "note": "Cột \"Chặn bởi\" cho biết việc đó phải đợi việc nào xong trước. Việc không có số ở cột này là làm được ngay.",
+      "headers": ["#", "Giai đoạn", "Đầu việc", "Ai làm", "Chặn bởi", "Trạng thái", "Cách biết là xong"],
+      "widths": [5, 16, 46, 17, 13, 14, 58],
+      "wrap": [false, false, true, false, false, false, true],
+      "statusCol": 6,
+      "rows": [
+        [1, "Dữ liệu WP", "Import 4 file JSON vào WordPress", "Founder", "—", "Chưa làm", "Menu trái có Dịch vụ, Dự án, Anmitech"],
+        [2, "Dữ liệu WP", "Đổi permalink sang Post name", "Founder", "—", "Chưa làm", "Mở /dich-vu/ không ra 404"],
+        [3, "Dữ liệu WP", "Dán snippet-rest.php và xác minh endpoint", "Founder", "1", "Chưa làm", "/wp-json/anmitech/v1/home trả 3 khoá. Chưa lint được vì máy không có PHP — lỗi thì gửi nguyên văn."],
+        [4, "SEO", "Cài Rank Math và xác minh meta key", "Founder + Claude", "—", "Chưa làm", "/wp-json/wp/v2/posts?_fields=seo trả đúng chuỗi đã gõ, không phải tiêu đề bài"],
+        [5, "Dữ liệu WP", "Nhập nội dung thật vào WordPress", "Founder", "1", "Chưa làm", "Có ≥3 Dịch vụ, ≥2 Dự án, trang Cấu hình đã điền. Chỉ nội dung có thật."],
+        [6, "Môi trường", "Cài Node.js LTS", "Founder", "—", "Chưa làm", "node --version ra số. Đã kiểm tra: máy chưa có node/npm, chỉ có git 2.55."],
+        [7, "Môi trường", "Chốt font chữ cho anmitech.vn", "Founder", "—", "Chưa làm", "Có tên font, đủ dấu tiếng Việt. Đổi font sau sẽ vỡ khoảng cách mọi trang."],
+        [8, "Môi trường", "Chốt danh sách trang và định vị Anmitech", "Founder", "—", "Chưa làm", "Có sitemap + mô tả khác biệt so với Nam làm WEB"],
+        [9, "Frontend", "Khởi tạo Next.js + Tailwind + bộ hiệu ứng", "Claude", "6, 7", "Chưa làm", "npm run dev chạy, hiệu ứng Aura và reveal hoạt động, logo trong public/"],
+        [10, "Frontend", "Dựng layout: header, footer, nút sáng/tối, nền Aura", "Claude", "8, 9", "Chưa làm", "Đổi theme rồi tải lại trang không nháy trắng"],
+        [11, "Frontend", "Dựng trang chủ đọc dữ liệu thật từ WordPress", "Claude", "3, 5, 10", "Chưa làm", "Sửa nội dung trong WP thì frontend đổi theo. Đây là lát cắt dọc kiểm chứng cả kiến trúc."],
+        [12, "Frontend", "Trang Dịch vụ — danh sách và chi tiết", "Claude", "11", "Chưa làm", "Bảng giá 3 cột đúng repeater packages, gói popular nổi bật"],
+        [13, "Frontend", "Trang Dự án — danh sách, lọc, chi tiết", "Claude", "11", "Chưa làm", "Lọc theo Nhóm dự án chạy, case study hiện đủ khối"],
+        [14, "SEO", "Nối SEO: metadata, schema, sitemap, robots", "Claude", "4, 12, 13", "Chưa làm", "Xem nguồn trang thấy title, og:image, ld+json. Sitemap sinh từ Next.js."],
+        [15, "Frontend", "Trang Liên hệ và form", "Claude", "10", "Chưa làm", "Gửi thử nhận được. Cần chốt nơi nhận: email / Zalo / lưu vào WP."],
+        [16, "Triển khai", "Deploy lên Vercel và nối revalidate", "Claude + Founder", "11", "Chưa làm", "Sửa bài trong WP → frontend cập nhật mà không deploy lại"],
+        [17, "Triển khai", "Chặn Google index domain WordPress", "Founder", "—", "Chưa làm", "Mở domain WP hỏi mật khẩu. Đặt WP_HOME và WP_SITEURL trong wp-config.php."],
+        [18, "Triển khai", "Trỏ tên miền anmitech.vn và bàn giao", "Founder + Claude", "14, 15, 16, 17", "Chưa làm", "anmitech.vn chạy HTTPS, sitemap nộp Search Console, có tài liệu bàn giao"]
+      ]
+    },
+    {
+      "name": "Đã xong",
+      "title": "ANMITECH — Phần đã hoàn thành",
+      "note": "Ghi lại để không làm lại và để biết cái gì đã sẵn sàng dùng.",
+      "headers": ["Hạng mục", "Nằm ở đâu", "Trạng thái", "Ghi chú"],
+      "widths": [40, 46, 16, 58],
+      "wrap": [true, true, false, true],
+      "statusCol": 3,
+      "rows": [
+        ["Khảo sát hiệu ứng ximitech.vn", "docs/XIMITECH-PHAN-TICH-HIEU-UNG.md", "Xong", "Chỉ lấy kỹ thuật hiệu ứng, không lấy thiết kế hay nội dung"],
+        ["Bộ hiệu ứng CSS + JS", "src/styles/effects.css, src/lib/effects.js", "Xong", "Không phụ thuộc thư viện animation nào. Có --fx-speed để xem chậm."],
+        ["Component React cho hiệu ứng", "src/react/fx.jsx", "Xong", "useEffects, TechBackground, Reveal, Karaoke, Words, Marquee, CountUp, Spotlight"],
+        ["Giao diện sáng / tối + nền Aura", "src/styles/effects.css", "Xong", "Bản sáng không phải đảo màu — lưới và quầng dùng alpha khác hẳn"],
+        ["Demo một file HTML", "demo.html (59,4 KB)", "Xong", "Tự chứa, 4 nút điều khiển: tốc độ, phát lại, sáng/tối, giảm chuyển động"],
+        ["Bảng màu thương hiệu", "docs/BRAND-TOKENS.md", "Xong", "#0073EA + gradient 6 điểm dừng, đọc trực tiếp từ logo SVG chốt"],
+        ["Bộ logo chính thức", "logo svg/ (11 file)", "Xong", "Đủ bản ngang, dọc, trắng, đen, không slogan, favicon"],
+        ["Cấu trúc dữ liệu WordPress", "wp-import/*.json (4 file)", "Xong", "CPT Dịch vụ + Dự án, taxonomy, Options Page, toàn bộ trường SCF"],
+        ["Endpoint REST cho Next.js", "wp-import/snippet-rest.php", "Xong", "Chưa lint được vì máy không có PHP"],
+        ["Cầu nối SEO Rank Math", "wp-import/snippet-rankmath.php", "Xong", "Tên meta key chưa đối chiếu bản thật — cần xác minh khi cài"],
+        ["Hướng dẫn bật SVG an toàn", "wp-import/snippet-svg.php", "Xong", "Khuyến nghị dùng plugin Safe SVG thay vì snippet này"],
+        ["Tài liệu import và kiểm tra", "wp-import/README.md", "Xong", "Có checklist sau import và cách sửa cấu trúc mà không mất dữ liệu"]
+      ]
+    }
+  ]
+}

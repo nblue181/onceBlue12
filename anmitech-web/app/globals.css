@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* effects.css KHÔNG nạp bằng @import ở đây.
+   CSS yêu cầu @import phải nằm trước mọi rule khác, mà file này bắt đầu bằng
+   @tailwind. Nạp trong app/layout.jsx sau globals.css — vừa đúng thứ tự
+   (hiệu ứng ghi đè Tailwind), vừa không phá luật @import. */
+
+/* --------------------------------------------------------------------------
+   Màu chữ. effects.css chỉ khai màu nền và màu hiệu ứng, không khai màu chữ,
+   nên phần này là của dự án. Phải khai cho CẢ HAI giao diện — thiếu bản sáng
+   thì chữ trắng nằm trên nền trắng.
+   ----------------------------------------------------------------------- */
+:root,
+html[data-theme='dark'] {
+  --ink-text: 210 20% 96%;
+  --ink-muted: 210 16% 72%;
+  --ink-line: 210 30% 100%;
+  --ink-line-alpha: 0.12;
+
+  /* Dải nền xen kẽ. Tối hơn nền gốc để tạo nhịp, nhưng vẫn trong suốt một phần
+     nên ma trận chấm và quầng sáng của Aura vẫn xuyên qua được. Đục hẳn thì
+     mất Aura ở đúng một nửa số section, nhìn ra ngay là hai trang khác nhau. */
+  --surface-alt: 211 62% 5%;
+  --surface-alt-a: 0.5;
+}
+
+html[data-theme='light'] {
+  --ink-text: 211 45% 12%;
+  --ink-muted: 211 18% 38%;
+  --ink-line: 211 45% 12%;
+  --ink-line-alpha: 0.14;
+
+  /* Nền sáng đi hướng ngược lại: dải xen kẽ SÁNG hơn nền gốc. Làm tối đi trên
+     nền trắng sẽ ra màu xám bẩn chứ không ra cảm giác phân tầng. */
+  --surface-alt: 0 0% 100%;
+  --surface-alt-a: 0.55;
+}
+
+/* Biến nền Aura được ghi đè ở app/aura-theme.css — file đó nạp sau effects.css. */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Màu nền gốc đặt ở <html> chứ không ở <body>: lớp Aura nằm sau body, nếu
+       body có màu đục thì nó che mất Aura. */
+    background-color: var(--aura-base);
+  }
+
+  body {
+    background-color: transparent;
+    color: hsl(var(--ink-text));
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Viền focus phải thấy được trên cả hai giao diện — mặc định của trình duyệt
+     biến mất trên nền tối. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--brand-cyan));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Nút: hình khối và khoảng đệm. Gradient thật nằm ở .fx-btn-brand trong
+     effects.css, thêm class đó vào để có màu thương hiệu. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3
+           text-sm font-semibold transition;
+  }
+
+  .btn-ghost {
+    border: 1px solid hsl(var(--ink-line) / var(--ink-line-alpha));
+    color: hsl(var(--ink-text) / 0.85);
+  }
+  .btn-ghost:hover {
+    border-color: hsl(var(--brand-400) / 0.5);
+    color: hsl(var(--ink-text));
+  }
+
+  /* Nhãn nhỏ in hoa phía trên tiêu đề section. */
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.16em];
+    color: hsl(var(--brand-400));
+  }
+  html[data-theme='light'] .eyebrow {
+    /* brand-400 trên nền trắng chỉ đạt 2.6:1 — tụt xuống 600 cho đủ đọc. */
+    color: hsl(var(--brand-600));
+  }
+
+  .section-title {
+    @apply mt-3 text-balance text-3xl font-bold tracking-tightest md:text-4xl;
+  }
+
+  .muted {
+    color: hsl(var(--ink-muted));
+  }
+
+  /* Đường kẻ mảnh dùng chung cho header, footer, bảng so sánh. */
+  .hairline {
+    border-color: hsl(var(--ink-line) / var(--ink-line-alpha));
+  }
+
+  /* Dải nền xen kẽ giữa các section, tạo nhịp cho trang dài.
+     Dùng gradient chứ không màu phẳng: hai mép trên dưới tan dần vào nền chung
+     nên không có đường cắt ngang. Có đường cắt thì trang đọc ra là mấy khối rời
+     ghép lại, không phải một mặt liền. */
+  .section-alt {
+    background-image: linear-gradient(
+      180deg,
+      hsl(var(--surface-alt) / 0) 0%,
+      hsl(var(--surface-alt) / var(--surface-alt-a)) 8%,
+      hsl(var(--surface-alt) / var(--surface-alt-a)) 92%,
+      hsl(var(--surface-alt) / 0) 100%
+    );
+  }
+
+  /* Nhãn tròn nhỏ. Dùng cho cụm chip công nghệ trôi lơ lửng ở phần Giới thiệu. */
+  .chip {
+    @apply inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold;
+    border: 1px solid hsl(var(--brand-400) / 0.35);
+    background-color: hsl(var(--brand-400) / 0.08);
+    color: hsl(var(--brand-400));
+  }
+  html[data-theme='light'] .chip {
+    /* brand-400 trên nền trắng chỉ đạt 2.6:1 — tụt xuống 600 cho đủ đọc. */
+    border-color: hsl(var(--brand) / 0.28);
+    background-color: hsl(0 0% 100% / 0.75);
+    color: hsl(var(--brand-600));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Ẩn/hiện theo giao diện. Dùng cho cặp logo: bản gradient cho nền sáng, bản
+   trắng cho nền tối.
+
+   Vì sao đặt cả hai thẻ <img> vào DOM rồi ẩn một cái, thay vì đổi src bằng JS:
+   đổi src sau khi trang vẽ sẽ thấy logo nhảy một nhịp, và ở lần tải đầu tiên
+   logo sai màu hiện ra trước khi JS chạy.
+   ----------------------------------------------------------------------- */
+html[data-theme='dark'] .dark-hide,
+html[data-theme='light'] .light-hide {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Nền Aura chạy suốt cả trang.
+
+   `position: fixed` chứ không `absolute`: nền phải đứng yên khi cuộn, không
+   trôi theo nội dung. Nếu để absolute thì trang dài 7 section sẽ có quầng sáng
+   nằm ở đâu đó trên cùng rồi cuộn mất, còn phần dưới trơ nền phẳng.
+
+   `isolation: isolate` là bắt buộc. Ba lớp Aura dùng mix-blend-mode; không cắt
+   ngữ cảnh trộn ở đây thì chúng trộn màu với cả chữ và thẻ nội dung phía trên.
+   ----------------------------------------------------------------------- */
+.aura-fixed {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  isolation: isolate;
+  pointer-events: none;
+  background-color: var(--aura-base);
+}
+
+/* Vệt sáng quét ngang toàn bộ nền, chu kỳ dài để không cướp sự chú ý.
+   Blur 54px theo đúng nguyên tắc trong docs/HUONG-DAN-HIEU-UNG.md — blur càng
+   lớn trình duyệt càng phải vẽ lại nhiều, mà 54px đã đủ mềm. */
+.aura-sweep {
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: 0;
+  width: 34%;
+  pointer-events: none;
+  mix-blend-mode: var(--aura-blend);
+  filter: blur(54px);
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    var(--aura-sweep) 42%,
+    var(--aura-sweep) 58%,
+    transparent 100%
+  );
+  animation: aura-sweep-move calc(19s * var(--fx-speed)) linear infinite;
+}
+
+@keyframes aura-sweep-move {
+  from {
+    transform: skewX(-14deg) translateX(-120%);
+  }
+  to {
+    transform: skewX(-14deg) translateX(420%);
+  }
+}
+
+/* Vệt thứ hai, ngược chiều và chậm hơn, để nền không thành một nhịp lặp đơn. */
+.aura-sweep-2 {
+  animation-duration: calc(31s * var(--fx-speed));
+  animation-direction: reverse;
+  width: 22%;
+  opacity: 0.7;
+}
+
+/* Giảm chuyển động: vệt sáng đứng yên ở giữa thay vì biến mất hẳn — mất luôn
+   thì nền sáng/tối lệch hẳn so với máy có chuyển động. Cùng quy ước
+   html:not(.fx-force-motion) như effects.css để nút "bật hiệu ứng" vẫn thắng. */
+@media (prefers-reduced-motion: reduce) {
+  html:not(.fx-force-motion) .aura-sweep {
+    animation: none;
+    transform: skewX(-14deg) translateX(120%);
+  }
+}

@@ -1,0 +1,1321 @@
+[
+    {
+        "key": "group_anmi_service",
+        "title": "Thông tin dịch vụ",
+        "fields": [
+            {
+                "key": "field_anmi_svc_tab_info",
+                "label": "Giới thiệu",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_svc_icon",
+                "label": "Icon",
+                "name": "icon",
+                "type": "select",
+                "instructions": "Tên icon trong bộ hiệu ứng frontend. Để trống thì thẻ không có icon.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "layout": "Khung website",
+                    "cart": "Giỏ hàng",
+                    "building": "Toà nhà",
+                    "target": "Mục tiêu",
+                    "chat": "Trò chuyện",
+                    "square": "Ô tích"
+                },
+                "default_value": "",
+                "return_format": "value",
+                "multiple": 0,
+                "allow_null": 1,
+                "ui": 0,
+                "ajax": 0,
+                "placeholder": ""
+            },
+            {
+                "key": "field_anmi_svc_short",
+                "label": "Mô tả ngắn",
+                "name": "short_desc",
+                "type": "textarea",
+                "instructions": "Một câu, hiển thị ở thẻ dịch vụ. Giữ dưới 100 ký tự.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "70",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 2,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_svc_price_from",
+                "label": "Giá khởi điểm",
+                "name": "price_from",
+                "type": "number",
+                "instructions": "Chỉ nhập số, ví dụ 4000000. Frontend tự định dạng thành 4.000.000đ.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "35",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "min": "",
+                "max": "",
+                "step": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "đ"
+            },
+            {
+                "key": "field_anmi_svc_name_title",
+                "label": "Tên dùng trong tiêu đề bảng giá",
+                "name": "name_in_title",
+                "type": "text",
+                "instructions": "Ví dụ: Thiết kế Website doanh nghiệp",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "65",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_hero",
+                "label": "Mô tả đầu trang",
+                "name": "hero_desc",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 3,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_svc_chips",
+                "label": "Chip cam kết",
+                "name": "chips",
+                "type": "repeater",
+                "instructions": "Các nhãn ngắn hiển thị dưới tiêu đề. Ví dụ: Bàn giao 7 ngày.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Thêm chip",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_svc_chip_label",
+                        "label": "Nội dung",
+                        "name": "label",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_svc_chips"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_svc_tab_cmp",
+                "label": "So sánh trang chủ",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_svc_show",
+                "label": "Đưa vào bảng so sánh trang chủ",
+                "name": "cmp_show",
+                "type": "true_false",
+                "instructions": "Tắt thì dịch vụ vẫn có trang riêng, chỉ không thành một cột trong bảng. Bảng đọc tối đa 4 cột — bật quá 4 thì lấy 4 dịch vụ đầu theo thứ tự Page Attributes.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_anmi_svc_recommended",
+                "label": "Cột được đề xuất",
+                "name": "cmp_recommended",
+                "type": "true_false",
+                "instructions": "Cột này được tô sáng và có nhãn nổi. Chỉ nên bật ở một dịch vụ. Khác với \"Gói phổ biến\" ở tab Bảng giá — cái đó dành cho gói bên trong một dịch vụ.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_anmi_svc_badge",
+                "label": "Nhãn trên đầu cột",
+                "name": "cmp_badge",
+                "type": "text",
+                "instructions": "Chữ in hoa ngắn. Ví dụ: KHỞI ĐỘNG NHANH · TĂNG TRƯỞNG · THEO YÊU CẦU.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "KHỞI ĐỘNG NHANH",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_price_prefix",
+                "label": "Tiền tố giá",
+                "name": "cmp_price_prefix",
+                "type": "text",
+                "instructions": "Để trống nếu giá là con số chốt. Nhập \"Từ\" khi giá còn tuỳ phạm vi.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "20",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "Từ",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_price_original",
+                "label": "Giá gốc (gạch ngang)",
+                "name": "cmp_price_original",
+                "type": "number",
+                "instructions": "Chỉ nhập số. Để trống thì không hiện giá gạch ngang. Giá đang bán lấy từ trường \"Giá khởi điểm\" ở tab Giới thiệu — không nhập lại ở đây.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "min": "",
+                "max": "",
+                "step": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "đ"
+            },
+            {
+                "key": "field_anmi_svc_price_badge",
+                "label": "Nhãn cạnh giá",
+                "name": "cmp_price_badge",
+                "type": "text",
+                "instructions": "Để trống thì frontend tự tính phần trăm từ Giá gốc và Giá khởi điểm (ra \"TIẾT KIỆM 37%\"). Chỉ nhập tay khi muốn chữ khác, ví dụ \"ƯU ĐÃI SCOPE ĐẦU\".",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "(tự tính)",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_price_note",
+                "label": "Ghi chú dưới giá",
+                "name": "cmp_price_note",
+                "type": "text",
+                "instructions": "Một dòng nhỏ. Ví dụ: Giá ưu đãi theo phạm vi.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "Giá ưu đãi theo phạm vi",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_duration",
+                "label": "Hàng — Thời gian",
+                "name": "cmp_duration",
+                "type": "text",
+                "instructions": "Ví dụ: 3–5 ngày · 7–14 ngày · Theo phạm vi.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "3–5 ngày",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_fit",
+                "label": "Hàng — Phù hợp",
+                "name": "cmp_fit",
+                "type": "textarea",
+                "instructions": "Ai nên chọn gói này. Ví dụ: Chiến dịch, giới thiệu dịch vụ, form tư vấn.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "75",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 2,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_svc_design",
+                "label": "Hàng — Giao diện",
+                "name": "cmp_design",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "1 giao diện responsive",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_seo",
+                "label": "Hàng — SEO",
+                "name": "cmp_seo",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "SEO nền tảng",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_admin",
+                "label": "Hàng — Quản trị",
+                "name": "cmp_admin",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "Form liên hệ",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_analytics",
+                "label": "Hàng — Đo lường",
+                "name": "cmp_analytics",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "GA4 + Pixel cơ bản",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_support",
+                "label": "Hàng — Hỗ trợ",
+                "name": "cmp_support",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "Bảo hành 36 tháng",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_highlight",
+                "label": "Hàng — Điểm nổi bật",
+                "name": "cmp_highlight",
+                "type": "text",
+                "instructions": "Ô cuối, được tô đậm hơn các hàng khác.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "Tặng hosting 1 năm",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_cta_label",
+                "label": "Nhãn nút dưới cột",
+                "name": "cmp_cta_label",
+                "type": "text",
+                "instructions": "Để trống thì dùng \"Nhận báo giá\". Viết riêng cho từng cột sẽ tự nhiên hơn.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "Nhận báo giá Landing",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_svc_extra",
+                "label": "Hàng so sánh thêm",
+                "name": "cmp_extra_rows",
+                "type": "repeater",
+                "instructions": "Chỉ dùng khi cần một hàng mà bảng chưa có. Muốn hàng đó thẳng cột thì phải nhập CÙNG một nhãn ở tất cả các dịch vụ — dịch vụ nào thiếu sẽ hiện dấu gạch.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Thêm hàng",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_svc_extra_label",
+                        "label": "Nhãn hàng",
+                        "name": "label",
+                        "type": "text",
+                        "instructions": "Ví dụ: Bảo mật",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_svc_extra"
+                    },
+                    {
+                        "key": "field_anmi_svc_extra_value",
+                        "label": "Nội dung ô",
+                        "name": "value",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_svc_extra"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_svc_tab_price",
+                "label": "Bảng giá",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_svc_packages",
+                "label": "Các gói",
+                "name": "packages",
+                "type": "repeater",
+                "instructions": "Frontend hiển thị 3 cột. Gói giữa nên bật Gói phổ biến.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "field_anmi_pkg_name",
+                "button_label": "Thêm gói",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_pkg_name",
+                        "label": "Tên gói",
+                        "name": "name",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_svc_packages"
+                    },
+                    {
+                        "key": "field_anmi_pkg_popular",
+                        "label": "Gói phổ biến",
+                        "name": "popular",
+                        "type": "true_false",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 0,
+                        "ui": 1,
+                        "ui_on_text": "",
+                        "ui_off_text": "",
+                        "parent_repeater": "field_anmi_svc_packages"
+                    },
+                    {
+                        "key": "field_anmi_pkg_tag",
+                        "label": "Mô tả một dòng",
+                        "name": "tag",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_svc_packages"
+                    },
+                    {
+                        "key": "field_anmi_pkg_prefix",
+                        "label": "Tiền tố giá",
+                        "name": "price_prefix",
+                        "type": "text",
+                        "instructions": "Để trống, hoặc nhập: chỉ từ",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_svc_packages"
+                    },
+                    {
+                        "key": "field_anmi_pkg_price",
+                        "label": "Giá",
+                        "name": "price",
+                        "type": "text",
+                        "instructions": "Số hoặc khoảng giá",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "40",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_svc_packages"
+                    },
+                    {
+                        "key": "field_anmi_pkg_duration",
+                        "label": "Thời gian",
+                        "name": "duration",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "35",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_svc_packages"
+                    },
+                    {
+                        "key": "field_anmi_pkg_blurb",
+                        "label": "Câu giới thiệu",
+                        "name": "blurb",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "rows": 2,
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_anmi_svc_packages"
+                    },
+                    {
+                        "key": "field_anmi_pkg_features",
+                        "label": "Tính năng",
+                        "name": "features",
+                        "type": "repeater",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "layout": "table",
+                        "pagination": 0,
+                        "min": 0,
+                        "max": 0,
+                        "collapsed": "",
+                        "button_label": "Thêm tính năng",
+                        "rows_per_page": 20,
+                        "parent_repeater": "field_anmi_svc_packages",
+                        "sub_fields": [
+                            {
+                                "key": "field_anmi_pkg_feat_label",
+                                "label": "Nội dung",
+                                "name": "label",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "maxlength": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "parent_repeater": "field_anmi_pkg_features"
+                            }
+                        ]
+                    },
+                    {
+                        "key": "field_anmi_pkg_cta",
+                        "label": "Nhãn nút",
+                        "name": "cta_label",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "40",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "Tư vấn ngay",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_svc_packages"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_svc_tab_rel",
+                "label": "Liên kết",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_svc_rel_projects",
+                "label": "Dự án liên quan",
+                "name": "related_projects",
+                "type": "relationship",
+                "instructions": "Bỏ trống thì frontend tự lấy 3 dự án mới nhất.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "project"
+                ],
+                "post_status": "",
+                "taxonomy": "",
+                "filters": [
+                    "search",
+                    "taxonomy"
+                ],
+                "return_format": "id",
+                "min": "",
+                "max": 3,
+                "elements": [
+                    "featured_image"
+                ],
+                "bidirectional": 0,
+                "bidirectional_target": []
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "service"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 1
+    },
+    {
+        "key": "group_anmi_project",
+        "title": "Thông tin dự án",
+        "fields": [
+            {
+                "key": "field_anmi_prj_tab_over",
+                "label": "Tổng quan",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_prj_client",
+                "label": "Khách hàng",
+                "name": "client",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_prj_industry",
+                "label": "Lĩnh vực",
+                "name": "industry",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_prj_type",
+                "label": "Loại website",
+                "name": "website_type",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_prj_duration",
+                "label": "Thời gian thực hiện",
+                "name": "duration",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_prj_year",
+                "label": "Năm hoàn thành",
+                "name": "year",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": 4,
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_prj_url",
+                "label": "URL website",
+                "name": "website_url",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "https://"
+            },
+            {
+                "key": "field_anmi_prj_featured",
+                "label": "Đưa lên trang chủ",
+                "name": "featured",
+                "type": "true_false",
+                "instructions": "Trang chủ lấy tối đa 5 dự án được đánh dấu.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_anmi_prj_hero_img",
+                "label": "Ảnh hero (16:8)",
+                "name": "hero_image",
+                "type": "image",
+                "instructions": "Ảnh đại diện (Featured image) dùng cho thẻ ở lưới.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_anmi_prj_tab_case",
+                "label": "Nội dung case study",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_prj_problem",
+                "label": "Vấn đề của khách hàng",
+                "name": "problem_text",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 4,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_prj_sol_intro",
+                "label": "Giới thiệu giải pháp",
+                "name": "solution_intro",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 3,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_prj_solutions",
+                "label": "Các khối giải pháp",
+                "name": "solutions",
+                "type": "repeater",
+                "instructions": "Frontend trình bày xen kẽ trái/phải theo thứ tự.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "field_anmi_prj_sol_title",
+                "button_label": "Thêm khối",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_prj_sol_title",
+                        "label": "Tiêu đề",
+                        "name": "title",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "60",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_prj_solutions"
+                    },
+                    {
+                        "key": "field_anmi_prj_sol_img",
+                        "label": "Ảnh (4:3)",
+                        "name": "image",
+                        "type": "image",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "40",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "array",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": "",
+                        "preview_size": "thumbnail",
+                        "parent_repeater": "field_anmi_prj_solutions"
+                    },
+                    {
+                        "key": "field_anmi_prj_sol_text",
+                        "label": "Mô tả",
+                        "name": "text",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "rows": 4,
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_anmi_prj_solutions"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_prj_results",
+                "label": "Kết quả",
+                "name": "results",
+                "type": "repeater",
+                "instructions": "Chỉ ghi kết quả có thật. Không bịa số liệu.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Thêm kết quả",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_prj_res_title",
+                        "label": "Tiêu đề",
+                        "name": "title",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "35",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_prj_results"
+                    },
+                    {
+                        "key": "field_anmi_prj_res_desc",
+                        "label": "Mô tả",
+                        "name": "desc",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_prj_results"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_prj_gallery",
+                "label": "Thư viện ảnh",
+                "name": "gallery",
+                "type": "gallery",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "library": "all",
+                "min": "",
+                "max": "",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "insert": "append",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_anmi_prj_rel_services",
+                "label": "Dịch vụ liên quan",
+                "name": "related_services",
+                "type": "relationship",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "service"
+                ],
+                "post_status": "",
+                "taxonomy": "",
+                "filters": [
+                    "search"
+                ],
+                "return_format": "id",
+                "min": "",
+                "max": 3,
+                "elements": "",
+                "bidirectional": 0,
+                "bidirectional_target": []
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "project"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 1
+    }
+]

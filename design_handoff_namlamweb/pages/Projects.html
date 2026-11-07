@@ -1,0 +1,195 @@
+<!-- @dsCard group="Website" viewport="1440x820" name="Dự án — Archives (hi-fi)" subtitle="Trang danh sách dự án — lọc + phân trang" -->
+<!--
+  Hallmark · macrostructure: Catalogue Grid · genre: modern-minimal · theme: brand-locked (Nam làm WEB DS)
+  WordPress template: archive (project listing) · gradient: none · eyebrows: 1 · motion: reveal · filter
+-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dự án — Nam làm WEB</title>
+<link rel="icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../styles.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{font-family:var(--font-body);color:var(--text);background:var(--white);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--font-heading);line-height:var(--lh-heading);font-weight:var(--fw-black);color:var(--brand-900);overflow-wrap:anywhere}
+a{color:var(--brand-500);text-decoration:none}a:hover{color:var(--brand-700)}
+img{display:block;max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.eyebrow{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+.lead{color:var(--text-muted);font-size:18px;max-width:56ch}
+.ic{width:18px;height:18px;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;flex:none}
+.ic-zalo{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3C6.5 3 2 6.7 2 11.3c0 2.6 1.4 4.9 3.7 6.4-.2.9-.7 2.2-1 2.9-.2.4.1.7.5.6 1.6-.5 3.2-1.2 3.9-1.6 1 .2 1.9.3 2.9.3 5.5 0 10-3.7 10-8.3S17.5 3 12 3z'/%3E%3C/svg%3E")}
+.ic-mess{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2C6.3 2 2 6.2 2 11.6c0 2.9 1.3 5.5 3.4 7.2V22l3.1-1.7c.8.2 1.7.3 2.5.3 5.7 0 10-4.2 10-9.6S17.7 2 12 2zm1 12.3l-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.8-2.7-5.3 5.7z'/%3E%3C/svg%3E")}
+.ic-arr{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2.2' d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E")}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:var(--fs-button);padding:14px 26px;border:1.5px solid transparent;cursor:pointer;line-height:1;transition:background .16s,color .16s,transform .12s,border-color .16s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--brand-500);color:#fff}.btn-primary:hover{background:var(--brand-700);color:#fff}
+.btn-onbrand{background:#fff;color:var(--brand-700)}.btn-onbrand:hover{background:var(--brand-50)}
+.btn-white-out{background:transparent;border-color:rgba(255,255,255,.55);color:#fff}.btn-white-out:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn-lg{padding:17px 32px;font-size:16px}
+.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hd{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.hd .row{display:flex;align-items:center;justify-content:space-between;height:74px}
+.hd .logo{height:30px}
+.hd nav{display:flex;gap:6px}
+.hd nav a{font-family:var(--font-heading);font-weight:var(--fw-semibold);font-size:15px;color:var(--text);padding:8px 14px;border-bottom:2px solid transparent}
+.hd nav a:hover{color:var(--brand-500)}
+.hd nav a.on{color:var(--brand-900);border-bottom-color:var(--brand-500)}
+.hd .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;padding:8px}
+.hd .burger i{width:24px;height:2px;background:var(--brand-900);display:block}
+
+/* hero */
+.ph{padding:72px 0 40px}
+.ph h1{font-size:var(--fs-display);line-height:1.1;margin:14px 0 16px;letter-spacing:-.01em}
+.ph p{color:var(--text-muted);font-size:19px;max-width:52ch}
+
+/* filter bar */
+.filter{border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:sticky;top:74px;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);z-index:30}
+.filter .wrap{display:flex;gap:8px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}
+.fchip{font-family:var(--font-heading);font-weight:var(--fw-semibold);font-size:14px;color:var(--text-muted);background:none;border:1px solid var(--border);padding:9px 16px;cursor:pointer;transition:all .15s}
+.fchip:hover{border-color:var(--brand-500);color:var(--brand-500)}
+.fchip.on{background:var(--brand-500);border-color:var(--brand-500);color:#fff}
+
+/* grid */
+.gridsec{padding:48px 0 88px}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.pcard{background:#fff;border:1px solid var(--border);display:flex;flex-direction:column;transition:box-shadow .18s,transform .18s,border-color .18s}
+.pcard:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--brand-100)}
+.pcard .shot{aspect-ratio:16/10;background:repeating-linear-gradient(135deg,#EAEFF2 0 16px,#E3EAEE 16px 32px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:#93a7b0;font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.pcard .body{padding:22px 24px}
+.pcard .cat{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text)}
+.pcard h3{font-size:var(--fs-h3);margin:6px 0 12px}
+.pcard .info{display:flex;gap:28px;margin-bottom:18px}
+.pcard .info span{display:block;font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px}
+.pcard .info b{font-family:var(--font-heading);font-weight:var(--fw-semibold);color:var(--brand-900);font-size:14px}
+.pcard .more{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:14px;color:var(--brand-500);display:inline-flex;align-items:center;gap:6px}
+.pcard:hover .more .ic{transform:translateX(3px);transition:transform .18s}
+.empty{grid-column:1/-1;color:var(--text-muted);padding:40px 0;text-align:center;display:none}
+
+/* pager */
+.pager{display:flex;gap:8px;justify-content:center;margin-top:48px}
+.pg-n{width:44px;height:44px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:15px;color:var(--text-muted);background:#fff;cursor:pointer}
+.pg-n:hover{border-color:var(--brand-500);color:var(--brand-500)}
+.pg-n.on{background:var(--brand-500);color:#fff;border-color:var(--brand-500)}
+
+.cta{background:var(--brand-500);color:#fff;text-align:center;padding:88px 0}
+.cta h2{color:#fff;font-size:var(--fs-h1);margin-bottom:14px}
+.cta p{color:rgba(255,255,255,.92);font-size:18px;max-width:52ch;margin:0 auto 30px}
+.cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.ft{background:var(--brand-900);color:#fff;padding:64px 0 30px}
+.ft .cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
+.ft .logo{height:28px;margin-bottom:16px}
+.ft p{color:#9db6c0;font-size:14px;margin-bottom:8px}
+.ft .tag{color:var(--accent);font-family:var(--font-heading);font-weight:var(--fw-bold)}
+.ft h5{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.ft ul{list-style:none}.ft li{margin-bottom:10px}
+.ft li a{color:#9db6c0;font-size:14px}.ft li a:hover{color:#fff}
+.ft .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#6f8a94;font-size:13px}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease,ease),transform .6s var(--ease,ease)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:900px){
+  .hd nav,.hd .cta-h{display:none}.hd .burger{display:flex}
+  .pgrid{grid-template-columns:1fr}
+  .ft .cols{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){.rv{transition:opacity .15s;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap row">
+    <a href="index.html"><img class="logo" src="../assets/logo-horizontal.png" alt="Nam làm WEB"></a>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="About.html">Giới thiệu</a>
+      <a href="#">Dịch vụ</a>
+      <a href="#" class="on">Dự án</a>
+      <a href="#">Liên hệ</a>
+    </nav>
+    <div class="cta-h"><a class="btn btn-primary" href="#"><span class="ic ic-zalo"></span>Nhắn Zalo</a></div>
+    <button class="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="ph">
+  <div class="wrap">
+    <div class="eyebrow">Dự án</div>
+    <h1>Những website đã thực hiện</h1>
+    <p>Một số dự án tiêu biểu qua các lĩnh vực. Bấm vào từng dự án để xem cách tôi giải quyết bài toán của khách hàng.</p>
+  </div>
+</section>
+
+<!-- FILTER -->
+<div class="filter">
+  <div class="wrap">
+    <button class="fchip on" data-filter="all">Tất cả</button>
+    <button class="fchip" data-filter="doanh-nghiep">Website doanh nghiệp</button>
+    <button class="fchip" data-filter="landing">Landing page</button>
+    <button class="fchip" data-filter="dich-vu">Website dịch vụ</button>
+    <button class="fchip" data-filter="ban-hang">Website bán hàng</button>
+  </div>
+</div>
+
+<!-- GRID -->
+<section class="gridsec">
+  <div class="wrap">
+    <div class="pgrid" id="pgrid">
+      <a class="pcard rv" href="ProjectDetail.html" data-cat="doanh-nghiep"><div class="shot">Ảnh dự án</div><div class="body"><div class="cat">Website doanh nghiệp</div><h3>Tên dự án 01</h3><div class="info"><div><span>Lĩnh vực</span><b>Xây dựng</b></div><div><span>Loại website</span><b>Website giới thiệu</b></div></div><span class="more">Xem chi tiết<span class="ic ic-arr"></span></span></div></a>
+      <a class="pcard rv" href="ProjectDetail.html" data-cat="landing"><div class="shot">Ảnh dự án</div><div class="body"><div class="cat">Landing page</div><h3>Tên dự án 02</h3><div class="info"><div><span>Lĩnh vực</span><b>Mỹ phẩm</b></div><div><span>Loại website</span><b>Landing page</b></div></div><span class="more">Xem chi tiết<span class="ic ic-arr"></span></span></div></a>
+      <a class="pcard rv" href="ProjectDetail.html" data-cat="dich-vu"><div class="shot">Ảnh dự án</div><div class="body"><div class="cat">Website dịch vụ</div><h3>Tên dự án 03</h3><div class="info"><div><span>Lĩnh vực</span><b>Spa &amp; làm đẹp</b></div><div><span>Loại website</span><b>Website dịch vụ</b></div></div><span class="more">Xem chi tiết<span class="ic ic-arr"></span></span></div></a>
+      <a class="pcard rv" href="ProjectDetail.html" data-cat="ban-hang"><div class="shot">Ảnh dự án</div><div class="body"><div class="cat">Website bán hàng</div><h3>Tên dự án 04</h3><div class="info"><div><span>Lĩnh vực</span><b>Thời trang</b></div><div><span>Loại website</span><b>Website bán hàng</b></div></div><span class="more">Xem chi tiết<span class="ic ic-arr"></span></span></div></a>
+      <a class="pcard rv" href="ProjectDetail.html" data-cat="doanh-nghiep"><div class="shot">Ảnh dự án</div><div class="body"><div class="cat">Website doanh nghiệp</div><h3>Tên dự án 05</h3><div class="info"><div><span>Lĩnh vực</span><b>Sản xuất</b></div><div><span>Loại website</span><b>Website giới thiệu</b></div></div><span class="more">Xem chi tiết<span class="ic ic-arr"></span></span></div></a>
+      <a class="pcard rv" href="ProjectDetail.html" data-cat="dich-vu"><div class="shot">Ảnh dự án</div><div class="body"><div class="cat">Website dịch vụ</div><h3>Tên dự án 06</h3><div class="info"><div><span>Lĩnh vực</span><b>Phòng khám</b></div><div><span>Loại website</span><b>Website dịch vụ</b></div></div><span class="more">Xem chi tiết<span class="ic ic-arr"></span></span></div></a>
+      <a class="pcard rv" href="ProjectDetail.html" data-cat="landing"><div class="shot">Ảnh dự án</div><div class="body"><div class="cat">Landing page</div><h3>Tên dự án 07</h3><div class="info"><div><span>Lĩnh vực</span><b>Giáo dục</b></div><div><span>Loại website</span><b>Landing page</b></div></div><span class="more">Xem chi tiết<span class="ic ic-arr"></span></span></div></a>
+      <a class="pcard rv" href="ProjectDetail.html" data-cat="ban-hang"><div class="shot">Ảnh dự án</div><div class="body"><div class="cat">Website bán hàng</div><h3>Tên dự án 08</h3><div class="info"><div><span>Lĩnh vực</span><b>Nội thất</b></div><div><span>Loại website</span><b>Website bán hàng</b></div></div><span class="more">Xem chi tiết<span class="ic ic-arr"></span></span></div></a>
+      <a class="pcard rv" href="ProjectDetail.html" data-cat="doanh-nghiep"><div class="shot">Ảnh dự án</div><div class="body"><div class="cat">Website doanh nghiệp</div><h3>Tên dự án 09</h3><div class="info"><div><span>Lĩnh vực</span><b>Dịch vụ</b></div><div><span>Loại website</span><b>Website đa trang</b></div></div><span class="more">Xem chi tiết<span class="ic ic-arr"></span></span></div></a>
+      <div class="empty" id="empty">Chưa có dự án trong nhóm này.</div>
+    </div>
+    <div class="pager">
+      <span class="pg-n on">1</span><span class="pg-n">2</span><span class="pg-n">3</span><span class="pg-n"><span class="ic ic-arr"></span></span>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Dự án tiếp theo là của bạn?</h2>
+    <p>Nhắn tin để trao đổi về website bạn đang cần — tư vấn miễn phí, không ràng buộc.</p>
+    <div class="row">
+      <a class="btn btn-onbrand btn-lg" href="#"><span class="ic ic-zalo"></span>Nhắn Zalo</a>
+      <a class="btn btn-white-out btn-lg" href="#"><span class="ic ic-mess"></span>Messenger</a>
+    </div>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="cols">
+      <div><img class="logo" src="../assets/logo-horizontal-white.png" alt="Nam làm WEB"><p>Xây dựng niềm tin cho doanh nghiệp thông qua website.</p><p class="tag">Hiểu đúng. Làm đúng.</p></div>
+      <div><h5>Điều hướng</h5><ul><li><a href="index.html">Trang chủ</a></li><li><a href="About.html">Giới thiệu</a></li><li><a href="#">Dịch vụ</a></li><li><a href="#">Dự án</a></li><li><a href="#">Liên hệ</a></li></ul></div>
+      <div><h5>Liên hệ</h5><ul><li><a href="#">Zalo: 09xx xxx xxx</a></li><li><a href="#">Messenger</a></li><li><a href="#">Hotline: 1900 xxxx</a></li><li><a href="#">hello@namlamweb.com</a></li></ul></div>
+      <div><h5>Bắt đầu ngay</h5><p>Nhắn tin để được tư vấn miễn phí, không ràng buộc.</p><a class="btn btn-primary" href="#" style="margin-top:8px"><span class="ic ic-zalo"></span>Nhắn Zalo</a></div>
+    </div>
+    <div class="bottom"><span>© 2026 Nam làm WEB</span><span>namlamweb.com</span></div>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const chips=[...document.querySelectorAll('.fchip')];const cards=[...document.querySelectorAll('.pcard')];const empty=document.getElementById('empty');
+chips.forEach(c=>c.addEventListener('click',()=>{
+  chips.forEach(x=>x.classList.remove('on'));c.classList.add('on');
+  const f=c.dataset.filter;let vis=0;
+  cards.forEach(card=>{const show=f==='all'||card.dataset.cat===f;card.style.display=show?'':'none';if(show)vis++;});
+  empty.style.display=vis?'none':'block';
+}));
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!-- @dsCard group="Website" viewport="1440x820" name="Giới thiệu (hi-fi)" subtitle="Trang Giới thiệu — editorial long-document" -->
+<!--
+  Hallmark · macrostructure: Long Document / Letter · genre: modern-minimal · theme: brand-locked (Nam làm WEB DS)
+  gradient: none (reserved for Home) · one dark band (Vision) · eyebrows: 2 · motion: reveal
+-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giới thiệu — Nam làm WEB</title>
+<link rel="icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../styles.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{font-family:var(--font-body);color:var(--text);background:var(--white);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--font-heading);line-height:var(--lh-heading);font-weight:var(--fw-black);color:var(--brand-900);overflow-wrap:anywhere}
+a{color:var(--brand-500);text-decoration:none}
+a:hover{color:var(--brand-700)}
+img{display:block;max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.eyebrow{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+.lead{color:var(--text-muted);font-size:18px;max-width:56ch}
+
+/* icons */
+.ic{width:18px;height:18px;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;flex:none}
+.ic-zalo{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3C6.5 3 2 6.7 2 11.3c0 2.6 1.4 4.9 3.7 6.4-.2.9-.7 2.2-1 2.9-.2.4.1.7.5.6 1.6-.5 3.2-1.2 3.9-1.6 1 .2 1.9.3 2.9.3 5.5 0 10-3.7 10-8.3S17.5 3 12 3z'/%3E%3C/svg%3E")}
+.ic-mess{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2C6.3 2 2 6.2 2 11.6c0 2.9 1.3 5.5 3.4 7.2V22l3.1-1.7c.8.2 1.7.3 2.5.3 5.7 0 10-4.2 10-9.6S17.7 2 12 2zm1 12.3l-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.8-2.7-5.3 5.7z'/%3E%3C/svg%3E")}
+.ic-arr{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2.2' d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E")}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:var(--fs-button);padding:14px 26px;border:1.5px solid transparent;cursor:pointer;line-height:1;transition:background .16s,color .16s,transform .12s,border-color .16s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--brand-500);color:#fff}
+.btn-primary:hover{background:var(--brand-700);color:#fff}
+.btn-onbrand{background:#fff;color:var(--brand-700)}
+.btn-onbrand:hover{background:var(--brand-50)}
+.btn-ghost{background:transparent;border-color:var(--border);color:var(--brand-900)}
+.btn-ghost:hover{border-color:var(--brand-500);color:var(--brand-500)}
+.btn-white-out{background:transparent;border-color:rgba(255,255,255,.55);color:#fff}
+.btn-white-out:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn-lg{padding:17px 32px;font-size:16px}
+.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* header */
+.hd{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.hd .row{display:flex;align-items:center;justify-content:space-between;height:74px}
+.hd .logo{height:30px}
+.hd nav{display:flex;gap:6px}
+.hd nav a{font-family:var(--font-heading);font-weight:var(--fw-semibold);font-size:15px;color:var(--text);padding:8px 14px;border-bottom:2px solid transparent}
+.hd nav a:hover{color:var(--brand-500)}
+.hd nav a.on{color:var(--brand-900);border-bottom-color:var(--brand-500)}
+.hd .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;padding:8px}
+.hd .burger i{width:24px;height:2px;background:var(--brand-900);display:block}
+
+/* about hero */
+.ah{padding:80px 0 72px;border-bottom:1px solid var(--border)}
+.ah .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:center}
+.ah h1{font-size:var(--fs-display);line-height:1.1;margin:16px 0 20px;letter-spacing:-.01em}
+.ah p{color:var(--text-muted);font-size:19px;max-width:50ch}
+.ah .sig{margin-top:26px;font-family:var(--font-heading);font-weight:var(--fw-bold);color:var(--brand-900);font-size:16px}
+.ah .sig span{display:block;color:var(--text-muted);font-weight:var(--fw-regular);font-size:14px;margin-top:2px}
+.portrait{aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#EAEFF2 0 16px,#E3EAEE 16px 32px);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:#93a7b0;font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+
+section{padding:88px 0}
+.alt{background:var(--surface-alt)}
+
+/* story */
+.story .wrap{display:grid;grid-template-columns:.32fr .68fr;gap:56px;align-items:start}
+.story .label{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:14px;color:var(--accent-text);letter-spacing:.12em;text-transform:uppercase;padding-top:6px}
+.story h2{font-size:var(--fs-h1);margin-bottom:22px}
+.story p{color:var(--text-muted);font-size:18px;margin-bottom:18px}
+.story .pull{border-left:3px solid var(--brand-500);padding-left:22px;margin:30px 0;font-family:var(--font-heading);font-weight:var(--fw-semibold);font-size:22px;color:var(--brand-900);line-height:1.4}
+
+/* vision — dark band */
+.vision{background:var(--brand-900);color:#fff;text-align:center}
+.vision .eyebrow{color:var(--accent);display:block;margin-bottom:20px}
+.vision blockquote{font-family:var(--font-heading);font-weight:var(--fw-black);color:#fff;font-size:34px;line-height:1.3;max-width:20ch;margin:0 auto;letter-spacing:-.01em}
+.vision .by{color:var(--brand-100);margin-top:22px;font-size:15px}
+
+/* values — editorial numbered list */
+.head{max-width:640px;margin-bottom:12px}
+.head h2{font-size:var(--fs-h1);margin:12px 0 0}
+.vlist{margin-top:36px;border-top:1px solid var(--border)}
+.vrow{display:grid;grid-template-columns:96px 1fr;gap:32px;padding:28px 0;border-bottom:1px solid var(--border);align-items:baseline}
+.vrow .n{font-family:var(--font-heading);font-weight:var(--fw-black);font-size:40px;color:var(--brand-100);line-height:1}
+.vrow h3{font-size:var(--fs-h3);margin-bottom:8px}
+.vrow p{color:var(--text-muted);font-size:16px;max-width:60ch}
+
+/* experience — domain chips */
+.exp h2{font-size:var(--fs-h1);margin-bottom:8px}
+.exp p.lead{margin-bottom:28px}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{background:#fff;border:1px solid var(--border);color:var(--brand-900);font-family:var(--font-heading);font-weight:var(--fw-semibold);font-size:15px;padding:11px 18px}
+
+/* working style — principles */
+.ways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:36px}
+.way{border-top:3px solid var(--brand-500);padding-top:20px}
+.way .s{font-family:var(--font-heading);font-weight:var(--fw-black);font-size:13px;color:var(--brand-500);letter-spacing:.06em}
+.way h4{font-size:var(--fs-h4);margin:12px 0 8px}
+.way p{color:var(--text-muted);font-size:15px}
+
+/* cta */
+.cta{background:var(--brand-500);color:#fff;text-align:center}
+.cta h2{color:#fff;font-size:var(--fs-h1);margin-bottom:14px}
+.cta p{color:rgba(255,255,255,.92);font-size:18px;max-width:52ch;margin:0 auto 30px}
+.cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* footer */
+.ft{background:var(--brand-900);color:#fff;padding:64px 0 30px}
+.ft .cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
+.ft .logo{height:28px;margin-bottom:16px}
+.ft p{color:#9db6c0;font-size:14px;margin-bottom:8px}
+.ft .tag{color:var(--accent);font-family:var(--font-heading);font-weight:var(--fw-bold)}
+.ft h5{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.ft ul{list-style:none}
+.ft li{margin-bottom:10px}
+.ft li a{color:#9db6c0;font-size:14px}
+.ft li a:hover{color:#fff}
+.ft .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#6f8a94;font-size:13px}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease,ease),transform .6s var(--ease,ease)}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .hd nav,.hd .cta-h{display:none}
+  .hd .burger{display:flex}
+  .ah .wrap,.story .wrap{grid-template-columns:1fr;gap:36px}
+  .vrow{grid-template-columns:56px 1fr;gap:20px}
+  .ways{grid-template-columns:1fr}
+  .vision blockquote{font-size:26px}
+  .ft .cols{grid-template-columns:1fr 1fr}
+  section{padding:60px 0}
+}
+@media(prefers-reduced-motion:reduce){.rv{transition:opacity .15s;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap row">
+    <a href="index.html"><img class="logo" src="../assets/logo-horizontal.png" alt="Nam làm WEB"></a>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="#" class="on">Giới thiệu</a>
+      <a href="#">Dịch vụ</a>
+      <a href="#">Dự án</a>
+      <a href="#">Liên hệ</a>
+    </nav>
+    <div class="cta-h"><a class="btn btn-primary" href="#"><span class="ic ic-zalo"></span>Nhắn Zalo</a></div>
+    <button class="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<!-- ABOUT HERO -->
+<section class="ah">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Giới thiệu</div>
+      <h1>Người xây dựng niềm tin cho doanh nghiệp qua website</h1>
+      <p>Tôi là Nam. Tôi làm website cho các doanh nghiệp nhỏ — những người giỏi trong lĩnh vực của mình nhưng chưa quen với công nghệ. Việc của tôi là giúp bạn hiểu rõ website của mình, chứ không chỉ giao cho bạn một sản phẩm.</p>
+      <div class="sig">Nam — Nam làm WEB<span>Hiểu đúng. Làm đúng.</span></div>
+    </div>
+    <div class="portrait">Ảnh chân dung</div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="wrap">
+    <div class="label rv">Câu chuyện</div>
+    <div class="rv">
+      <h2>Bắt đầu từ một điều đơn giản: khách hàng cần được hiểu</h2>
+      <p>Trong nhiều năm làm website, tôi gặp không ít chủ doanh nghiệp nhỏ từng làm web nhưng không hiểu mình đang có gì, sửa gì cũng phải nhờ người khác, và dần thấy website là gánh nặng thay vì công cụ.</p>
+      <p>Tôi tin điều đó không cần thiết. Một website tốt là website mà chủ của nó hiểu được — biết nó nói gì, hoạt động ra sao, và tự tin sử dụng.</p>
+      <div class="pull">"Bạn sẽ hiểu website của mình trước khi sở hữu nó."</div>
+      <p>Đó là lý do Nam làm WEB tồn tại: làm website trọn gói, nhưng luôn giải thích rõ ràng để bạn thật sự làm chủ.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section class="vision">
+  <div class="wrap">
+    <span class="eyebrow rv">Tầm nhìn</span>
+    <blockquote class="rv">Mỗi doanh nghiệp nhỏ đều xứng đáng có một website họ thật sự hiểu và làm chủ.</blockquote>
+    <div class="by rv">— Định hướng của Nam làm WEB</div>
+  </div>
+</section>
+
+<!-- CORE VALUES -->
+<section class="alt">
+  <div class="wrap">
+    <div class="head rv"><div class="eyebrow">Giá trị cốt lõi</div><h2>Bốn điều tôi luôn giữ</h2></div>
+    <div class="vlist">
+      <div class="vrow rv"><div class="n">01</div><div><h3>Rõ ràng</h3><p>Minh bạch về báo giá, tiến độ và những gì bạn sẽ nhận được — không có chi phí ẩn, không hứa suông.</p></div></div>
+      <div class="vrow rv"><div class="n">02</div><div><h3>Dễ hiểu</h3><p>Giải thích mọi thứ bằng ngôn ngữ đời thường, hạn chế tối đa thuật ngữ kỹ thuật khó hiểu.</p></div></div>
+      <div class="vrow rv"><div class="n">03</div><div><h3>Tận tâm</h3><p>Đồng hành từ ý tưởng đầu tiên đến khi bàn giao và cả sau đó, khi bạn cần hỗ trợ.</p></div></div>
+      <div class="vrow rv"><div class="n">04</div><div><h3>Thực tế</h3><p>Giải pháp vừa đủ, đúng nhu cầu kinh doanh của bạn — không vẽ vời những thứ tốn kém mà ít dùng.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp">
+  <div class="wrap">
+    <div class="rv">
+      <h2>Đã đồng hành cùng nhiều lĩnh vực</h2>
+      <p class="lead">Từ cửa hàng nhỏ đến doanh nghiệp dịch vụ — mỗi lĩnh vực một nhu cầu riêng, và tôi làm quen với việc lắng nghe trước khi đề xuất.</p>
+    </div>
+    <div class="chips rv">
+      <span class="chip">Quán ăn &amp; F&amp;B</span>
+      <span class="chip">Cửa hàng bán lẻ</span>
+      <span class="chip">Dịch vụ địa phương</span>
+      <span class="chip">Phòng khám &amp; spa</span>
+      <span class="chip">Giáo dục &amp; đào tạo</span>
+      <span class="chip">Xây dựng &amp; nội thất</span>
+      <span class="chip">Thương hiệu cá nhân</span>
+    </div>
+  </div>
+</section>
+
+<!-- WORKING STYLE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="head rv"><h2>Cách tôi làm việc với bạn</h2></div>
+    <div class="ways">
+      <div class="way rv"><div class="s">01</div><h4>Nói chuyện như người bình thường</h4><p>Trao đổi bằng ngôn ngữ dễ hiểu, không bắt bạn phải học thuật ngữ.</p></div>
+      <div class="way rv"><div class="s">02</div><h4>Minh bạch từng bước</h4><p>Bạn luôn biết đang ở đâu trong quá trình, chi phí và thời gian ra sao.</p></div>
+      <div class="way rv"><div class="s">03</div><h4>Không biến mất sau bàn giao</h4><p>Hướng dẫn bạn sử dụng và sẵn sàng hỗ trợ khi bạn cần về sau.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap">
+    <h2>Muốn trao đổi trực tiếp?</h2>
+    <p>Nhắn tin cho tôi để được tư vấn miễn phí. Không ràng buộc — chỉ là một cuộc trò chuyện để hiểu bạn cần gì.</p>
+    <div class="row">
+      <a class="btn btn-onbrand btn-lg" href="#"><span class="ic ic-zalo"></span>Nhắn Zalo</a>
+      <a class="btn btn-white-out btn-lg" href="#"><span class="ic ic-mess"></span>Messenger</a>
+    </div>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img class="logo" src="../assets/logo-horizontal-white.png" alt="Nam làm WEB">
+        <p>Xây dựng niềm tin cho doanh nghiệp thông qua website.</p>
+        <p class="tag">Hiểu đúng. Làm đúng.</p>
+      </div>
+      <div><h5>Điều hướng</h5><ul><li><a href="index.html">Trang chủ</a></li><li><a href="#">Giới thiệu</a></li><li><a href="#">Dịch vụ</a></li><li><a href="#">Dự án</a></li><li><a href="#">Liên hệ</a></li></ul></div>
+      <div><h5>Liên hệ</h5><ul><li><a href="#">Zalo: 09xx xxx xxx</a></li><li><a href="#">Messenger</a></li><li><a href="#">Hotline: 1900 xxxx</a></li><li><a href="#">hello@namlamweb.com</a></li></ul></div>
+      <div><h5>Bắt đầu ngay</h5><p>Nhắn tin để được tư vấn miễn phí, không ràng buộc.</p><a class="btn btn-primary" href="#" style="margin-top:8px"><span class="ic ic-zalo"></span>Nhắn Zalo</a></div>
+    </div>
+    <div class="bottom"><span>© 2026 Nam làm WEB</span><span>namlamweb.com</span></div>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

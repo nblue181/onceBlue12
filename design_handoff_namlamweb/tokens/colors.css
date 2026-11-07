@@ -1,0 +1,39 @@
+/* Nam làm WEB — Color tokens */
+:root {
+  /* Primary brand scale */
+  --brand-50: #EAF6FA;
+  --brand-100: #C9E9F1;
+  --brand-500: #027EA6;
+  --brand-700: #024E68;
+  --brand-900: #002735;
+
+  /* Accent — background/highlight only. For cyan text on white use --accent-text */
+  --accent: #6BDFEE;
+  --accent-text: #12889C;
+
+  /* Neutral */
+  --white: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-alt: #F6F8F9;
+  --border: #DBE2E6;
+  --text: #222A2F;
+  --text-muted: #4D5A61;
+
+  /* Semantic — status only */
+  --success: #1E9E57;
+  --warning: #E29100;
+  --error: #D93C3C;
+  --info: #2C7BE5;
+
+  /* Brand gradient — use sparingly (hero, primary button) */
+  --brand-gradient: linear-gradient(135deg, #6BDFEE 0%, #027EA6 100%); /* @kind color */
+
+  /* Semantic aliases */
+  --color-primary: var(--brand-500);
+  --color-primary-hover: var(--brand-700);
+  --text-body: var(--text);
+  --text-heading: var(--text);
+  --surface-card: var(--white);
+  --surface-page: var(--white);
+  --border-default: var(--border);
+}

@@ -1,0 +1,1548 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANMITECH — Demo hiệu ứng</title>
+<script>
+/* Dat giao dien TRUOC khi trang ve, neu khong se thay mot nhay trang/den. */
+(function () {
+  try {
+    var saved = localStorage.getItem('nlw-theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================= src/styles/effects.css ================= */
+/* =========================================================================
+   ANMITECH — Bộ hiệu ứng
+   Viết lại theo kỹ thuật khảo sát từ ximitech.vn, dùng bảng màu Anmitech.
+   Thuần CSS, không phụ thuộc thư viện animation nào.
+
+   Nạp sau Tailwind:  @import './styles/effects.css';
+   ====================================================================== */
+
+:root {
+  /* Màu thương hiệu — đọc trực tiếp từ logo_anmitech_ngang.svg (bản chốt).
+     Giữ phần thập phân để hsl() ra đúng hex gốc, làm tròn sẽ lệch 1–2 mức. */
+  --brand: 210.5 100% 45.9%;      /* #0073EA — xanh đậm, đầu cuối gradient */
+  --brand-cyan: 191.2 100% 50.6%; /* #03D0FF — cyan, đầu sáng của gradient */
+  --brand-400: 211 100% 57%;
+  --brand-600: 211 100% 38%;
+  --brand-900: 211 100% 18%;
+  --brand-950: 211 100% 11%;
+
+  /* Gradient của logo, 6 điểm dừng đúng như file gốc.
+     Dùng cho nút chính, viền nhấn, chữ gradient — thứ buộc giao diện khớp logo. */
+  --brand-gradient: linear-gradient(
+    135deg,
+    #03d0ff 0%,
+    #02b0f8 18%,
+    #0195f2 38%,
+    #0082ed 58%,
+    #0077eb 78%,
+    #0073ea 100%
+  );
+
+  /* Hệ số tốc độ. 1 = thật. Đặt 2 hoặc 4 để xem chậm lại khi trình bày.
+     Mọi thời lượng bên dưới đều nhân với biến này. */
+  --fx-speed: 1;
+
+  --fx-grid-size: 52px;
+  --fx-t-hover: 200ms;
+
+  /* Nhịp chuyển động. Chu kỳ dài để nền không cướp sự chú ý khỏi nội dung. */
+  --fx-t-grid:    calc(20s * var(--fx-speed));
+  --fx-t-light:   calc(9s  * var(--fx-speed));
+  --fx-t-shimmer: calc(8s  * var(--fx-speed));
+  --fx-t-wave-a:  calc(18s * var(--fx-speed));
+  --fx-t-wave-b:  calc(22s * var(--fx-speed));
+  --fx-t-scan:    calc(7s  * var(--fx-speed));
+
+  /* Thời lượng các hiệu ứng chạy một lần */
+  --fx-t-karaoke: calc(1100ms * var(--fx-speed));
+  --fx-t-word:    calc(760ms  * var(--fx-speed));
+  --fx-t-reveal:  calc(600ms  * var(--fx-speed));
+  --fx-t-float:   calc(1s     * var(--fx-speed));
+}
+
+/* -------------------------------------------------------------------------
+   Hai giao diện. Đặt data-theme trên thẻ <html>.
+   Không có thuộc tính đó thì mặc định dùng bản tối.
+   ---------------------------------------------------------------------- */
+
+:root,
+html[data-theme="dark"] {
+  --fx-bg: 211 60% 7%;
+
+  --fx-grid-line:  hsl(var(--brand-400) / 0.10);
+  --fx-glow-core:  hsl(var(--brand-400) / 0.16);
+  --fx-glow-sweep: hsl(var(--brand) / 0.08);
+  --fx-wave-a:     hsl(var(--brand) / 0.28);
+  --fx-wave-b:     hsl(var(--brand-400) / 0.20);
+  --fx-scan:       hsl(var(--brand-400) / 0.08);
+  --fx-wave-opacity: 0.35;
+  --fx-wave-opacity-hover: 0.48;
+  --fx-spot: hsl(var(--brand-400) / 0.10);
+
+  --fx-card-bg: hsl(var(--brand-400) / 0.03);
+  --fx-card-line: hsl(var(--brand-400) / 0.12);
+  --fx-card-bg-hover: hsl(var(--brand-400) / 0.06);
+  --fx-card-line-hover: hsl(var(--brand-400) / 0.45);
+  --fx-card-shadow: 0 8px 28px hsl(var(--brand-950) / 0.55);
+}
+
+html[data-theme="light"] {
+  --fx-bg: 210 40% 98%;
+
+  /* Trên nền sáng phải dùng màu đậm hơn và alpha thấp hơn, nếu không lưới
+     sẽ chìm mất còn quầng sáng thì loang thành vệt bẩn. */
+  --fx-grid-line:  hsl(var(--brand) / 0.10);
+  --fx-glow-core:  hsl(var(--brand) / 0.08);
+  --fx-glow-sweep: hsl(var(--brand) / 0.05);
+  --fx-wave-a:     hsl(var(--brand-400) / 0.22);
+  --fx-wave-b:     hsl(var(--brand) / 0.14);
+  --fx-scan:       hsl(var(--brand) / 0.04);
+  --fx-wave-opacity: 0.5;
+  --fx-wave-opacity-hover: 0.68;
+  --fx-spot: hsl(var(--brand) / 0.07);
+
+  --fx-card-bg: #FFFFFF;
+  --fx-card-line: hsl(var(--brand) / 0.16);
+  --fx-card-bg-hover: #FFFFFF;
+  --fx-card-line-hover: hsl(var(--brand) / 0.45);
+  --fx-card-shadow: 0 8px 28px hsl(var(--brand-900) / 0.12);
+}
+
+/* -------------------------------------------------------------------------
+   1. NỀN ĐỘNG — 4 lớp chồng nhau
+
+   <div class="fx-bg">
+     <div class="fx-grid"></div>
+     <div class="fx-wave fx-wave-a"></div>
+     <div class="fx-wave fx-wave-b"></div>
+     <div class="fx-scanline"></div>
+   </div>
+   ---------------------------------------------------------------------- */
+
+.fx-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: hsl(var(--fx-bg));
+}
+
+/* Lớp 1 — lưới kỹ thuật, mờ dần ở rìa */
+.fx-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--fx-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--fx-grid-line) 1px, transparent 1px);
+  background-size: var(--fx-grid-size) var(--fx-grid-size);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 20%, transparent 78%);
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 20%, transparent 78%);
+  animation: fx-grid-drift var(--fx-t-grid) ease-in-out infinite;
+  transform: translateZ(0);
+}
+
+/* Lớp 2 — quầng sáng giữa lưới */
+.fx-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(at 50% 55%, var(--fx-glow-core), transparent 36%),
+    linear-gradient(115deg, transparent 0%, var(--fx-glow-sweep) 46%, transparent 64%);
+  mix-blend-mode: screen;
+  animation: fx-grid-light var(--fx-t-light) ease-in-out infinite;
+}
+
+/* Lớp 3 — vệt sáng quét ngang */
+.fx-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to right, transparent, var(--fx-glow-sweep), transparent);
+  opacity: 0.28;
+  transform: translateX(-45%);
+  animation: fx-grid-shimmer var(--fx-t-shimmer) ease-in-out infinite;
+}
+
+/* Lớp 4 — hai quả cầu mờ khổng lồ.
+   blur 54px là mức đủ mềm mà vẫn rẻ; blur 150–250px khiến trình duyệt vẽ lại
+   mỗi khung hình và gây giật, nhất là khi trang có hiệu ứng theo cuộn. */
+.fx-wave {
+  position: absolute;
+  width: 70vw;
+  height: 70vw;
+  min-width: 520px;
+  min-height: 520px;
+  border-radius: 9999px;
+  filter: blur(54px);
+  opacity: var(--fx-wave-opacity);
+  transform: translateZ(0);
+  transition: opacity 600ms ease;
+}
+.fx-wave-a {
+  left: -18%;
+  top: 12%;
+  background: var(--fx-wave-a);
+  animation: fx-wave-drift-a var(--fx-t-wave-a) ease-in-out infinite;
+}
+.fx-wave-b {
+  right: -20%;
+  bottom: -28%;
+  background: var(--fx-wave-b);
+  animation: fx-wave-drift-b var(--fx-t-wave-b) ease-in-out infinite;
+}
+
+/* Rê chuột vào vùng nền thì quầng sáng đậm lên — thêm class bằng JS */
+.fx-bg.is-hovering .fx-wave-a { opacity: var(--fx-wave-opacity-hover); }
+.fx-bg.is-hovering .fx-wave-b { opacity: calc(var(--fx-wave-opacity-hover) * 0.9); }
+
+/* Lớp 5 — vệt quét dọc */
+.fx-scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, var(--fx-scan) 50%, transparent 100%);
+  transform: translateY(-100%);
+  animation: fx-scan var(--fx-t-scan) linear infinite;
+}
+
+@keyframes fx-grid-drift {
+  0%, 100% { background-position: 0 0, 0 0; transform: translateZ(0) scale(1); }
+  50%      { background-position: 18px -12px, -10px 16px; transform: translate3d(0, -1.4%, 0) scale(1.012); }
+}
+@keyframes fx-grid-light {
+  0%, 100% { opacity: 0.38; transform: translate3d(0, 2%, 0); }
+  50%      { opacity: 0.72; transform: translate3d(0, -2%, 0); }
+}
+@keyframes fx-grid-shimmer {
+  0%, 100% { transform: translateX(-55%); }
+  50%      { transform: translateX(55%); }
+}
+@keyframes fx-wave-drift-a {
+  0%, 100% { transform: translateZ(0) scale(1); }
+  50%      { transform: translate3d(8%, -6%, 0) scale(1.08); }
+}
+@keyframes fx-wave-drift-b {
+  0%, 100% { transform: translateZ(0) scale(1); }
+  50%      { transform: translate3d(-7%, 5%, 0) scale(1.06); }
+}
+@keyframes fx-scan {
+  to { transform: translateY(100%); }
+}
+
+/* -------------------------------------------------------------------------
+   1B. NỀN "AURA" — ma trận chấm + hai quầng sáng blur
+
+   Khác với .fx-bg ở trên (lưới kẻ ô kiểu XimiTech), bản này là ma trận CHẤM
+   tròn 20px cộng hai quầng sáng blur rất mạnh, trộn theo chế độ screen.
+
+   Cấu trúc:
+     <section class="aura-bg">
+       <div class="aura-layer-1"></div>
+       <div class="aura-layer-2"></div>
+       <div class="aura-layer-3"></div>
+       <div class="aura-content">…nội dung…</div>
+     </section>
+
+   Khối cha PHẢI có chiều cao rõ ràng (min-height), vì ba lớp đều position:absolute
+   nên không tự đẩy chiều cao.
+   ---------------------------------------------------------------------- */
+
+:root,
+html[data-theme="dark"] {
+  --aura-base: #041627;                            /* nền gốc, các lớp trộn lên trên */
+  --aura-dot: hsl(var(--brand-400) / 0.20);
+  /* Hai quầng lấy đúng hai đầu gradient logo: xanh đậm và cyan.
+     Cùng một dải màu nên nền và logo đọc ra là một hệ, không phải hai màu rời. */
+  --aura-glow-1: hsl(var(--brand) / 0.60);
+  --aura-glow-2: hsl(var(--brand-cyan) / 0.34);
+  --aura-blend: screen;
+  --aura-blur-1: 175px;
+  --aura-blur-2: 138px;
+}
+
+html[data-theme="light"] {
+  --aura-base: #F4F8FC;
+  --aura-dot: hsl(var(--brand) / 0.16);
+  --aura-glow-1: hsl(var(--brand-400) / 0.34);
+  /* Cyan nhạt hơn hẳn ở bản sáng: multiply trên nền trắng đẩy màu đậm lên nhanh */
+  --aura-glow-2: hsl(var(--brand-cyan) / 0.14);
+  /* screen trên nền sáng sẽ làm trắng xoá hết — multiply mới giữ được màu */
+  --aura-blend: multiply;
+  --aura-blur-1: 150px;
+  --aura-blur-2: 120px;
+}
+
+.aura-bg {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--aura-base);
+}
+
+.aura-layer-1,
+.aura-layer-2,
+.aura-layer-3 {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+
+/* Lớp 1 — ma trận chấm, không trộn màu */
+.aura-layer-1 {
+  background-image: radial-gradient(circle, var(--aura-dot) 1px, transparent 1px);
+  background-size: 20px 20px;
+  mix-blend-mode: normal;
+  animation: aura-dots-drift calc(24s * var(--fx-speed)) linear infinite;
+}
+
+/* Lớp 2 — quầng sáng lớn, trôi chậm */
+.aura-layer-2 {
+  background: radial-gradient(circle at 40% 40%, var(--aura-glow-1) 0%, transparent 50%);
+  mix-blend-mode: var(--aura-blend);
+  filter: blur(var(--aura-blur-1));
+  animation: aura-drift-1 calc(20s * var(--fx-speed)) ease-in-out infinite;
+}
+
+/* Lớp 3 — quầng sáng phụ, trôi ngược chiều */
+.aura-layer-3 {
+  background: radial-gradient(circle at 70% 65%, var(--aura-glow-2) 0%, transparent 40%);
+  mix-blend-mode: var(--aura-blend);
+  filter: blur(var(--aura-blur-2));
+  animation: aura-drift-2 calc(26s * var(--fx-speed)) ease-in-out infinite;
+}
+
+/* Máy để bàn màn hình lớn thì blur phải mạnh hơn mới đủ mềm */
+@media (min-width: 1024px) {
+  html[data-theme="dark"] { --aura-blur-1: 252px; --aura-blur-2: 198px; }
+  html[data-theme="light"] { --aura-blur-1: 210px; --aura-blur-2: 170px; }
+}
+
+/* Nội dung phải nằm trên ba lớp nền */
+.aura-content {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes aura-dots-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 20px 20px; }
+}
+@keyframes aura-drift-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(6%, -5%, 0) scale(1.12); }
+}
+@keyframes aura-drift-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(-7%, 6%, 0) scale(1.1); }
+}
+
+/* -------------------------------------------------------------------------
+   1C. ĐÁNH CHỮ (typewriter)
+   JS gõ từng ký tự, xoá đi rồi gõ cụm tiếp theo. Xem data-fx-type.
+   ---------------------------------------------------------------------- */
+
+.fx-type-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: currentColor;
+  animation: fx-caret calc(1.1s * var(--fx-speed)) steps(2, start) infinite;
+}
+
+/* -------------------------------------------------------------------------
+   2. VỆT SÁNG THEO CON TRỎ
+   Đặt trong khối cha có position:relative. JS cập nhật --fx-x / --fx-y.
+   ---------------------------------------------------------------------- */
+
+.fx-spotlight {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 9999px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  background: radial-gradient(circle, var(--fx-spot), transparent 70%);
+  left: var(--fx-x, 0);
+  top: var(--fx-y, 0);
+  transform: translate(-50%, -50%);
+}
+.fx-spotlight.is-on { opacity: 1; }
+
+/* -------------------------------------------------------------------------
+   3. HIỆU ỨNG CHỮ
+   ---------------------------------------------------------------------- */
+
+/* Karaoke — chữ hiện dần từ trái sang, kèm khử mờ.
+   Chỉ dùng cho MỘT cụm từ trọng tâm ở H1. Rải khắp trang là mất tác dụng. */
+.fx-karaoke {
+  display: inline-block;
+  color: hsl(var(--brand-400));
+  line-height: 1.18;
+  padding: 0.02em 0.02em 0.14em;
+  margin-bottom: -0.12em;
+  vertical-align: bottom;
+  background-image: linear-gradient(90deg, hsl(var(--brand) / 0.22), transparent);
+  background-size: 220% 100%;
+  background-repeat: no-repeat;
+  animation:
+    fx-karaoke-reveal var(--fx-t-karaoke) cubic-bezier(0.22, 1, 0.36, 1) both,
+    fx-karaoke-sweep var(--fx-t-karaoke) ease-out both;
+}
+@keyframes fx-karaoke-reveal {
+  0%   { clip-path: inset(-0.08em 100% -0.2em -0.02em); filter: blur(2px); }
+  55%  { filter: blur(0); }
+  100% { clip-path: inset(-0.08em -0.02em -0.2em -0.02em); filter: blur(0); }
+}
+@keyframes fx-karaoke-sweep {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Từng từ hiện lên mềm. Dùng biến --i cho độ trễ so le. */
+.fx-word {
+  display: inline-block;
+  animation: fx-word-in var(--fx-t-word) ease-out both;
+  animation-delay: calc(var(--i, 0) * 70ms * var(--fx-speed));
+}
+@keyframes fx-word-in {
+  0%   { opacity: 0;    filter: blur(10px) brightness(1.3); }
+  45%  { opacity: 0.75; filter: blur(3px)  brightness(1.18); }
+  100% { opacity: 1;    filter: blur(0)    brightness(1); }
+}
+
+/* Con trỏ nhấp nháy giả lập đang gõ */
+.fx-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 0.15em;
+  vertical-align: text-bottom;
+  background: hsl(var(--brand-400));
+  animation: fx-caret 1.1s steps(2, start) infinite;
+}
+@keyframes fx-caret { 50% { opacity: 0; } }
+
+/* -------------------------------------------------------------------------
+   4. TRÔI LƠ LỬNG — 5 quỹ đạo lệch pha, chu kỳ 12–18s
+   ---------------------------------------------------------------------- */
+
+.fx-float-1 { animation: fx-float-1 calc(12s * var(--fx-speed)) ease-in-out infinite; }
+.fx-float-2 { animation: fx-float-2 calc(15s * var(--fx-speed)) ease-in-out infinite; }
+.fx-float-3 { animation: fx-float-3 calc(18s * var(--fx-speed)) ease-in-out infinite; }
+.fx-float-4 { animation: fx-float-4 calc(14s * var(--fx-speed)) ease-in-out infinite; }
+.fx-float-5 { animation: fx-float-5 calc(16s * var(--fx-speed)) ease-in-out infinite; }
+.fx-float-soft { animation: fx-float-soft calc(4s * var(--fx-speed)) ease-in-out infinite; }
+
+@keyframes fx-float-1 {
+  0%, 100% { transform: translate(0, 0); }
+  25%  { transform: translate(10px, -15px); }
+  50%  { transform: translate(-5px, -25px); }
+  75%  { transform: translate(-15px, -10px); }
+}
+@keyframes fx-float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  25%  { transform: translate(-12px, -10px); }
+  50%  { transform: translate(6px, -22px); }
+  75%  { transform: translate(14px, -6px); }
+}
+@keyframes fx-float-3 {
+  0%, 100% { transform: translate(0, 0); }
+  30%  { transform: translate(8px, -20px); }
+  60%  { transform: translate(-10px, -12px); }
+  85%  { transform: translate(4px, -6px); }
+}
+@keyframes fx-float-4 {
+  0%, 100% { transform: translate(0, 0); }
+  20%  { transform: translate(-8px, -18px); }
+  55%  { transform: translate(12px, -8px); }
+  80%  { transform: translate(-4px, -22px); }
+}
+@keyframes fx-float-5 {
+  0%, 100% { transform: translate(0, 0); }
+  35%  { transform: translate(14px, -12px); }
+  65%  { transform: translate(-6px, -20px); }
+}
+@keyframes fx-float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-15px); }
+}
+@media (min-width: 768px) {
+  .fx-float-soft { animation-duration: calc(3s * var(--fx-speed)); }
+}
+
+/* -------------------------------------------------------------------------
+   5. MARQUEE
+   Nhân đôi danh sách con rồi chạy tới -50% để nối liền vô hạn.
+   JS tự nhân đôi giúp — xem data-fx-marquee.
+   ---------------------------------------------------------------------- */
+
+.fx-marquee { overflow: hidden; }
+.fx-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: fx-scroll-left calc(var(--fx-marquee-speed, 30s) * var(--fx-speed)) linear infinite;
+}
+.fx-marquee-track.is-reverse { animation-name: fx-scroll-right; }
+.fx-marquee:hover .fx-marquee-track { animation-play-state: paused; }
+
+@keyframes fx-scroll-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+@keyframes fx-scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+/* -------------------------------------------------------------------------
+   6. HIỆN DẦN KHI CUỘN
+   JS thêm .is-in khi phần tử vào khung nhìn.
+   ---------------------------------------------------------------------- */
+
+.fx-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--fx-t-reveal) ease,
+    transform var(--fx-t-reveal) cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 80ms * var(--fx-speed));
+}
+.fx-reveal.is-in { opacity: 1; transform: none; }
+
+.fx-reveal-left  { transform: translateX(-24px); }
+.fx-reveal-right { transform: translateX(24px); }
+.fx-reveal-zoom  { transform: scale(0.96); }
+
+/* -------------------------------------------------------------------------
+   7. HOVER — công thức thống nhất: viền sáng + nhấc nhẹ + bóng, 200ms
+   ---------------------------------------------------------------------- */
+
+.fx-card {
+  border: 1px solid var(--fx-card-line);
+  background: var(--fx-card-bg);
+  transition:
+    border-color var(--fx-t-hover) ease,
+    background-color var(--fx-t-hover) ease,
+    box-shadow var(--fx-t-hover) ease,
+    transform var(--fx-t-hover) ease;
+}
+.fx-card:hover {
+  border-color: var(--fx-card-line-hover);
+  background: var(--fx-card-bg-hover);
+  box-shadow: var(--fx-card-shadow);
+  transform: translateY(-2px);
+}
+
+/* Nút chính — mang đúng gradient của logo.
+   Gradient không animate được, nên dịch nền bằng background-position
+   trên một dải rộng gấp đôi. Rẻ hơn nhiều so với đổi background-image. */
+.fx-btn-brand {
+  background-image: var(--brand-gradient);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  color: #fff;
+  border: 0;
+  transition:
+    background-position 320ms ease,
+    box-shadow var(--fx-t-hover) ease,
+    transform var(--fx-t-hover) ease;
+}
+.fx-btn-brand:hover {
+  background-position: 0 0;   /* trượt về đầu cyan */
+  box-shadow: 0 8px 24px hsl(var(--brand) / 0.38);
+  transform: translateY(-1px);
+}
+
+/* Chữ tô gradient logo. Dùng cho MỘT cụm trong tiêu đề, không dùng cả câu —
+   chữ gradient dài đọc mệt và tụt tương phản ở đoạn nhạt. */
+.fx-text-brand {
+  background-image: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Chấm trạng thái lan toả */
+.fx-ping { position: relative; display: inline-flex; }
+.fx-ping::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: hsl(var(--brand-400) / 0.75);
+  animation: fx-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes fx-ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+/* -------------------------------------------------------------------------
+   8. ACCORDION — panel giãn theo chiều cao thật, JS đặt --fx-h
+   ---------------------------------------------------------------------- */
+
+.fx-acc-panel {
+  overflow: hidden;
+  height: 0;
+  transition: height 260ms ease;
+}
+.fx-acc-panel.is-open { height: var(--fx-h, auto); }
+.fx-acc-icon { transition: transform 260ms ease; }
+.fx-acc-trigger[aria-expanded="true"] .fx-acc-icon { transform: rotate(180deg); }
+
+/* -------------------------------------------------------------------------
+   9. TÔN TRỌNG "GIẢM CHUYỂN ĐỘNG"
+   Bắt buộc. Người dùng bật thiết lập này ở hệ điều hành vì lý do sức khoẻ
+   (chóng mặt, đau nửa đầu). Tắt chuyển động, giữ lại nội dung.
+   ---------------------------------------------------------------------- */
+
+/* Toàn bộ khối này chỉ áp dụng khi thẻ <html> KHÔNG có .fx-force-motion.
+   Có lớp đó nghĩa là người xem chủ động muốn thấy hiệu ứng — ví dụ ở trang demo,
+   hoặc khi họ tự bấm bật lại. Không có cách nào ghi đè media query bằng class,
+   nên phải đảo ngược điều kiện ngay từ selector. */
+@media (prefers-reduced-motion: reduce) {
+  html:not(.fx-force-motion) .fx-grid,
+  html:not(.fx-force-motion) .fx-grid::before,
+  html:not(.fx-force-motion) .fx-grid::after,
+  html:not(.fx-force-motion) .fx-wave,
+  html:not(.fx-force-motion) .fx-scanline,
+  html:not(.fx-force-motion) .aura-layer-1,
+  html:not(.fx-force-motion) .aura-layer-2,
+  html:not(.fx-force-motion) .aura-layer-3,
+  html:not(.fx-force-motion) .fx-float-1,
+  html:not(.fx-force-motion) .fx-float-2,
+  html:not(.fx-force-motion) .fx-float-3,
+  html:not(.fx-force-motion) .fx-float-4,
+  html:not(.fx-force-motion) .fx-float-5,
+  html:not(.fx-force-motion) .fx-float-soft,
+  html:not(.fx-force-motion) .fx-marquee-track,
+  html:not(.fx-force-motion) .fx-caret,
+  html:not(.fx-force-motion) .fx-type-caret,
+  html:not(.fx-force-motion) .fx-ping::before {
+    animation: none !important;
+  }
+  html:not(.fx-force-motion) .fx-scanline { display: none; }
+
+  html:not(.fx-force-motion) .fx-karaoke,
+  html:not(.fx-force-motion) .fx-word {
+    animation: none !important;
+    opacity: 1;
+    clip-path: none;
+    filter: none;
+  }
+
+  html:not(.fx-force-motion) .fx-reveal {
+    transition-duration: 150ms;
+    transform: none !important;
+  }
+
+  html:not(.fx-force-motion) .fx-card:hover { transform: none; }
+}
+
+/* Chỉ bật will-change khi thật sự có chuyển động — luôn bật sẽ tốn bộ nhớ GPU */
+@media (prefers-reduced-motion: no-preference) {
+  .fx-wave, .fx-grid { will-change: transform; }
+  .fx-word, .fx-karaoke { will-change: filter, opacity; }
+  .fx-marquee-track { will-change: transform; }
+}
+
+/* ================= CSS rieng cua demo ================= */
+  /* ---- CSS rieng cua trang demo, khong thuoc bo hieu ung ---- */
+
+  html[data-theme="dark"] {
+    --d-text: #D7E5EB; --d-muted: #7C93A5; --d-head: #FFFFFF;
+    --d-line: rgba(36,142,255,.18); --d-bar: rgba(8,19,31,.92);
+    --d-alt: rgba(255,255,255,.02); --d-code: #5CABFF;
+    --d-chip-bg: rgba(36,142,255,.06); --d-chip-line: rgba(36,142,255,.28); --d-chip-text: #A3D0FF;
+    --d-eyebrow: #248EFF;
+  }
+  html[data-theme="light"] {
+    --d-text: #33485C; --d-muted: #6B7F91; --d-head: #0B2138;
+    --d-line: rgba(0,116,238,.16); --d-bar: rgba(247,250,253,.92);
+    --d-alt: rgba(0,116,238,.035); --d-code: #005EC2;
+    --d-chip-bg: #FFFFFF; --d-chip-line: rgba(0,115,234,.22); --d-chip-text: #0073EA;
+    --d-eyebrow: #0073EA;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+    background: hsl(var(--fx-bg)); color: var(--d-text); line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .3s ease, color .3s ease;
+  }
+  code { font-family: ui-monospace, monospace; font-size: .9em; color: var(--d-code); }
+
+  .demo-bar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    padding: 12px 24px; background: var(--d-bar); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--d-line); font-size: 14px;
+  }
+  .demo-bar strong { color: var(--d-head); letter-spacing: -.02em; margin-right: auto; }
+  .demo-hint { color: var(--d-muted); }
+  .demo-ctl { display: inline-flex; align-items: center; gap: 8px; color: var(--d-muted); font-size: 13px; }
+  .demo-select {
+    font: inherit; font-size: 13px; padding: 6px 10px; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--d-line); background: var(--d-chip-bg); color: var(--d-text);
+  }
+  .demo-btn {
+    cursor: pointer; font: inherit; font-size: 13px;
+    padding: 7px 14px; border-radius: 8px;
+    border: 1px solid var(--d-chip-line); background: var(--d-chip-bg); color: var(--d-chip-text);
+    transition: background .2s ease, border-color .2s ease, transform .15s ease;
+  }
+  .demo-btn:hover { border-color: #0073EA; transform: translateY(-1px); }
+  .demo-btn-primary { background: #0073EA; border-color: #0073EA; color: #fff; font-weight: 600; }
+  .demo-btn-primary:hover { background: #005EC2; border-color: #005EC2; }
+
+  .demo-sec { position: relative; overflow: hidden; padding: 100px 0; }
+  .demo-sec-alt { background: var(--d-alt); }
+
+  .demo-aura { min-height: 92vh; display: flex; align-items: center; padding: 120px 0; }
+  .demo-type { color: #248EFF; }
+  html[data-theme="light"] .demo-type { color: #0073EA; }
+
+  .demo-warn {
+    margin: 0; padding: 14px 24px; font-size: 13.5px; line-height: 1.6;
+    background: rgba(255,176,32,.10); border-bottom: 1px solid rgba(255,176,32,.35); color: #E0AE5A;
+  }
+  .demo-warn b { color: #FFC46B; }
+  html[data-theme="light"] .demo-warn { background: #FFF7E6; color: #8A6220; border-bottom-color: #F0D9A8; }
+  html[data-theme="light"] .demo-warn b { color: #6B4A12; }
+  .demo-wrap { position: relative; z-index: 10; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .demo-wrap-narrow { max-width: 760px; }
+
+  .demo-eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--d-eyebrow); margin-bottom: 14px;
+  }
+  .demo-h1 { font-size: clamp(34px, 6vw, 64px); font-weight: 800; letter-spacing: -.045em; color: var(--d-head); line-height: 1.08; }
+  .demo-h2 { font-size: clamp(24px, 3.4vw, 36px); font-weight: 700; letter-spacing: -.035em; color: var(--d-head); margin-bottom: 32px; }
+  .demo-lead { margin-top: 20px; max-width: 62ch; color: var(--d-text); font-size: 18px; }
+  .demo-note { margin-top: 22px; color: var(--d-muted); font-size: 14px; max-width: 70ch; }
+
+  .demo-stats { display: flex; gap: 44px; flex-wrap: wrap; margin-top: 44px; }
+  .demo-stats span { display: block; font-size: 40px; font-weight: 800; color: var(--d-eyebrow); letter-spacing: -.03em; }
+  .demo-stats small { color: var(--d-muted); font-size: 13px; }
+
+  .demo-spot {
+    position: relative; overflow: hidden; display: grid; place-items: center;
+    height: 260px; border: 1px solid var(--d-line); border-radius: 12px;
+    background: var(--d-alt); color: var(--d-muted); font-size: 15px; text-align: center; padding: 0 20px;
+  }
+
+  .demo-floats { display: flex; flex-wrap: wrap; gap: 18px; }
+  .demo-chip {
+    display: inline-block; padding: 12px 22px; border-radius: 999px;
+    border: 1px solid var(--d-chip-line); background: var(--d-chip-bg);
+    color: var(--d-chip-text); font-weight: 600; font-size: 15px;
+  }
+
+  .demo-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .demo-grid-2 { margin-top: 20px; }
+  .demo-card { padding: 26px; border-radius: 12px; }
+  .demo-card h3 { color: var(--d-head); font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+  .demo-card p { color: var(--d-text); font-size: 15px; }
+  .demo-tag {
+    display: inline-block; margin-right: 8px; padding: 3px 9px; border-radius: 6px;
+    background: var(--d-chip-bg); border: 1px solid var(--d-chip-line);
+    color: var(--d-chip-text); font-size: 12px; font-family: ui-monospace, monospace;
+  }
+
+  .demo-marquee { margin-top: 18px; padding: 10px 0; }
+  .demo-pill {
+    flex: none; margin-right: 14px; padding: 12px 24px; border-radius: 999px;
+    background: var(--d-chip-bg); border: 1px solid var(--d-chip-line);
+    color: var(--d-chip-text); font-weight: 600; white-space: nowrap;
+  }
+  .demo-pill-ghost { background: transparent; color: var(--d-muted); }
+
+  .demo-acc-item { border: 1px solid var(--d-line); border-radius: 10px; margin-bottom: 12px; background: var(--d-alt); }
+  .demo-acc-btn {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    width: 100%; padding: 18px 20px; cursor: pointer; font: inherit; text-align: left;
+    background: none; border: 0; color: var(--d-head); font-weight: 600;
+  }
+  .demo-acc-btn .fx-acc-icon { color: var(--d-eyebrow); flex: none; }
+  .demo-acc-body { padding: 0 20px 20px; color: var(--d-text); font-size: 15px; }
+
+  .demo-grad {
+    height: 56px; border-radius: 8px; margin-top: 22px;
+    border: 1px solid var(--d-line);
+    background-image: var(--brand-gradient);
+  }
+  .demo-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
+  .demo-btn-brand {
+    display: inline-block; text-decoration: none;
+    background-image: var(--brand-gradient);
+    background-size: 200% 100%; background-position: 100% 0;
+    color: #fff; font-weight: 600; border: 0;
+    transition: background-position .32s ease, box-shadow .2s ease, transform .15s ease;
+  }
+  .demo-btn-brand:hover {
+    background-position: 0 0;
+    box-shadow: 0 8px 24px hsl(var(--brand) / .38);
+    transform: translateY(-1px);
+  }
+
+  .demo-swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+  .demo-swatches div { text-align: center; }
+  .demo-swatches i { display: block; width: 74px; height: 56px; border-radius: 8px; border: 1px solid var(--d-line); }
+  .demo-swatches b { display: block; margin-top: 6px; font-size: 12px; color: var(--d-muted); font-weight: 600; }
+
+  .demo-foot { padding: 60px 24px 80px; text-align: center; border-top: 1px solid var(--d-line); }
+  .demo-foot p { color: var(--d-muted); font-size: 14px; }
+  .demo-foot .demo-note { margin: 10px auto 0; }
+
+  /* Mo phong "giam chuyen dong" bang nut bam, de xem truoc trang thai du phong */
+  html.demo-no-motion *,
+  html.demo-no-motion *::before,
+  html.demo-no-motion *::after {
+    animation: none !important;
+    transition-duration: .12s !important;
+  }
+  html.demo-no-motion .fx-reveal { opacity: 1 !important; transform: none !important; }
+  html.demo-no-motion .fx-karaoke { clip-path: none !important; filter: none !important; }
+  html.demo-no-motion .fx-word { opacity: 1 !important; filter: none !important; }
+  html.demo-no-motion .fx-scanline { display: none; }
+</style>
+</head>
+<body>
+<!-- Phần thân của trang demo. build-demo.ps1 sẽ nhúng CSS và JS thật vào đây. -->
+
+<div class="demo-bar">
+  <strong>ANMITECH — Demo hiệu ứng</strong>
+
+  <label class="demo-ctl">
+    Tốc độ
+    <select id="selSpeed" class="demo-select">
+      <option value="1">1× — như thật</option>
+      <option value="2" selected>2× — chậm lại</option>
+      <option value="4">4× — rất chậm</option>
+      <option value="8">8× — soi từng bước</option>
+    </select>
+  </label>
+
+  <button id="btnReplay" class="demo-btn demo-btn-primary" type="button">Phát lại hiệu ứng</button>
+  <button id="btnTheme" class="demo-btn" type="button">Giao diện: Tối</button>
+  <button id="btnMotion" class="demo-btn" type="button">Thử giảm chuyển động</button>
+</div>
+
+<div id="motionWarn" class="demo-warn" hidden>
+  Máy bạn đang bật <b>giảm chuyển động</b> ở hệ điều hành, nên bình thường mọi hiệu ứng sẽ bị tắt.
+  Trang demo này đang <b>bật cưỡng bức</b> để bạn xem được. Bấm “Thử giảm chuyển động” để thấy
+  trạng thái mà khách của bạn sẽ gặp.
+</div>
+
+<!-- ============================ 0. NỀN AURA ============================ -->
+<section class="aura-bg demo-aura">
+  <div class="aura-layer-1"></div>
+  <div class="aura-layer-2"></div>
+  <div class="aura-layer-3"></div>
+
+  <div class="aura-content demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>00 · Nền Aura — ma trận chấm + hai quầng blur</p>
+
+    <h1 class="demo-h1" data-fx-reveal style="--i:1">
+      Chúng tôi làm<br>
+      <span class="demo-type" data-fx-type='["website doanh nghiệp","website bán hàng","landing page","web app quản lý"]' data-fx-type-speed="65" data-fx-type-pause="1500"></span>
+    </h1>
+
+    <p class="demo-lead" data-fx-reveal style="--i:2">
+      Chấm tròn 1px lưới 20px trôi liên tục. Hai quầng sáng blur 175px và 138px
+      (252px và 198px trên màn hình lớn) trôi ngược chiều nhau, trộn theo chế độ screen.
+    </p>
+  </div>
+</section>
+
+<!-- ============================ 1. HERO ============================ -->
+<section class="demo-sec" data-fx-hover-bg>
+  <div class="fx-bg" aria-hidden="true">
+    <div class="fx-grid"></div>
+    <div class="fx-wave fx-wave-a"></div>
+    <div class="fx-wave fx-wave-b"></div>
+    <div class="fx-scanline"></div>
+  </div>
+
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>01 · Nền động 4 lớp + chữ karaoke</p>
+
+    <h1 class="demo-h1" data-fx-reveal style="--i:1">
+      Website <span class="fx-karaoke">đúng nhu cầu</span><span class="fx-caret"></span>
+    </h1>
+
+    <p class="demo-lead" data-fx-words>
+      Lưới kỹ thuật trôi 20 giây, quầng sáng thở 9 giây, vệt quét dọc 7 giây. Rê chuột vào vùng này để thấy quầng sáng đậm lên.
+    </p>
+
+    <div class="demo-stats" data-fx-reveal style="--i:3">
+      <div><span data-fx-count="244" data-fx-count-suffix="+"></span><small>Con số đếm tăng dần</small></div>
+      <div><span data-fx-count="36"></span><small>Chỉ dùng cho số liệu thật</small></div>
+      <div><span data-fx-count="12" data-fx-count-suffix=" năm"></span><small>Không bịa thành tích</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 2. SPOTLIGHT ============================ -->
+<section class="demo-sec demo-sec-alt">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>02 · Vệt sáng đi theo con trỏ</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Di chuột trong khung dưới đây</h2>
+
+    <div class="demo-spot" data-fx-spotlight>
+      <span>Vệt sáng 500px bám theo con trỏ, hiện/ẩn trong 300ms</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 3. TRÔI LƠ LỬNG ============================ -->
+<section class="demo-sec">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>03 · Năm quỹ đạo trôi lệch pha</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Chu kỳ 12 đến 18 giây</h2>
+
+    <div class="demo-floats">
+      <span class="demo-chip fx-float-1">React</span>
+      <span class="demo-chip fx-float-2">Tailwind</span>
+      <span class="demo-chip fx-float-3">WordPress</span>
+      <span class="demo-chip fx-float-4">REST API</span>
+      <span class="demo-chip fx-float-5">Vite</span>
+      <span class="demo-chip fx-float-soft">SEO</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 4. THẺ + HIỆN DẦN ============================ -->
+<section class="demo-sec demo-sec-alt">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>04 · Hiện dần khi cuộn + hover thẻ</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Mỗi thẻ lệch nhau 80ms</h2>
+
+    <div class="demo-grid">
+      <article class="fx-card demo-card" data-fx-reveal style="--i:0">
+        <h3>Viền sáng lên</h3>
+        <p>Rê chuột vào thẻ: viền chuyển sang màu brand, nền đậm thêm một chút.</p>
+      </article>
+      <article class="fx-card demo-card" data-fx-reveal style="--i:1">
+        <h3>Nhấc 2px</h3>
+        <p>Dịch lên 2px kèm đổ bóng. Đủ để cảm nhận, không đủ để giật mình.</p>
+      </article>
+      <article class="fx-card demo-card" data-fx-reveal style="--i:2">
+        <h3>Đúng 200ms</h3>
+        <p>Nhanh hơn thì cộc, chậm hơn thì ì. Toàn site dùng chung một con số.</p>
+      </article>
+    </div>
+
+    <div class="demo-grid demo-grid-2">
+      <div class="demo-card" data-fx-reveal data-fx-reveal-variant="left">
+        <span class="demo-tag">fx-reveal-left</span> Trượt vào từ trái
+      </div>
+      <div class="demo-card fx-reveal-right" data-fx-reveal>
+        <span class="demo-tag">fx-reveal-right</span> Trượt vào từ phải
+      </div>
+      <div class="demo-card fx-reveal-zoom" data-fx-reveal>
+        <span class="demo-tag">fx-reveal-zoom</span> Phóng nhẹ từ 96%
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 5. MARQUEE ============================ -->
+<section class="demo-sec">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>05 · Băng chạy vô hạn</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Rê chuột vào để dừng lại</h2>
+  </div>
+
+  <div class="fx-marquee demo-marquee" data-fx-marquee="28s">
+    <div class="fx-marquee-track">
+      <span class="demo-pill">Website doanh nghiệp</span>
+      <span class="demo-pill">Website bán hàng</span>
+      <span class="demo-pill">Landing Page</span>
+      <span class="demo-pill">Web App</span>
+      <span class="demo-pill">Tối ưu tốc độ</span>
+      <span class="demo-pill">Bàn giao có hướng dẫn</span>
+    </div>
+  </div>
+
+  <div class="fx-marquee demo-marquee" data-fx-marquee="34s" data-fx-marquee-reverse>
+    <div class="fx-marquee-track">
+      <span class="demo-pill demo-pill-ghost">React</span>
+      <span class="demo-pill demo-pill-ghost">Tailwind</span>
+      <span class="demo-pill demo-pill-ghost">WordPress headless</span>
+      <span class="demo-pill demo-pill-ghost">REST API</span>
+      <span class="demo-pill demo-pill-ghost">Vite</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 6. ACCORDION ============================ -->
+<section class="demo-sec demo-sec-alt">
+  <div class="demo-wrap demo-wrap-narrow">
+    <p class="demo-eyebrow" data-fx-reveal>06 · Accordion</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Giãn theo chiều cao thật</h2>
+
+    <div class="demo-acc" data-fx-accordion>
+      <div data-fx-acc-item class="demo-acc-item">
+        <button class="fx-acc-trigger demo-acc-btn" type="button">
+          Vì sao không dùng thư viện animation?
+          <svg class="fx-acc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="fx-acc-panel"><div class="demo-acc-body">
+          Toàn bộ hiệu ứng ở đây là <code>@keyframes</code> và IntersectionObserver. Không GSAP,
+          không AOS, không Framer Motion. Nhẹ hơn và không phụ thuộc bản cập nhật của bên thứ ba.
+        </div></div>
+      </div>
+
+      <div data-fx-acc-item class="demo-acc-item">
+        <button class="fx-acc-trigger demo-acc-btn" type="button">
+          Vì sao chu kỳ animation lại dài như vậy?
+          <svg class="fx-acc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="fx-acc-panel"><div class="demo-acc-body">
+          Nền chuyển động 7 đến 22 giây một vòng. Đủ để trang có sức sống, không đủ để cướp
+          sự chú ý khỏi nội dung. Đây là ranh giới giữa "sang" và "rối".
+        </div></div>
+      </div>
+
+      <div data-fx-acc-item class="demo-acc-item">
+        <button class="fx-acc-trigger demo-acc-btn" type="button">
+          Vì sao blur chỉ 54px?
+          <svg class="fx-acc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="fx-acc-panel"><div class="demo-acc-body">
+          Blur càng lớn trình duyệt càng phải vẽ lại nhiều mỗi khung hình. 54px đã đủ mềm cho
+          quầng sáng, trong khi 150 đến 250px gây giật rõ khi trang có hiệu ứng theo cuộn.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 7. BẢNG MÀU ============================ -->
+<section class="demo-sec">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>07 · Bảng màu lấy từ logo</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">#0073EA — hsl(210.5 100% 45.9%)</h2>
+
+    <div class="demo-swatches" data-fx-reveal style="--i:2">
+      <div><i style="background:#F0F7FF"></i><b>50</b></div>
+      <div><i style="background:#DBEDFF"></i><b>100</b></div>
+      <div><i style="background:#A3D0FF"></i><b>200</b></div>
+      <div><i style="background:#5CABFF"></i><b>300</b></div>
+      <div><i style="background:#248EFF"></i><b>400</b></div>
+      <div><i style="background:#0073EA"></i><b>500</b></div>
+      <div><i style="background:#005EC2"></i><b>600</b></div>
+      <div><i style="background:#004A99"></i><b>700</b></div>
+      <div><i style="background:#003B7A"></i><b>800</b></div>
+      <div><i style="background:#002C5C"></i><b>900</b></div>
+      <div><i style="background:#001B38"></i><b>950</b></div>
+    </div>
+
+    <p class="demo-note" data-fx-reveal style="--i:3">
+      Logo không phải một màu phẳng mà là gradient sáu điểm dừng, từ cyan
+      <code>#03D0FF</code> sang xanh đậm <code>#0073EA</code>. Đây là thứ khiến
+      giao diện khớp logo chứ không chỉ "cùng màu xanh".
+    </p>
+
+    <div class="demo-grad" data-fx-reveal style="--i:4"></div>
+
+    <p class="demo-row" data-fx-reveal style="--i:5">
+      <a class="demo-btn demo-btn-brand" href="#">Nút mang gradient logo</a>
+      <span class="demo-note">rê chuột để thấy nền trượt về đầu cyan</span>
+    </p>
+  </div>
+</section>
+
+<footer class="demo-foot">
+  <p>Bộ hiệu ứng viết lại theo kỹ thuật khảo sát từ ximitech.vn, dùng bảng màu Anmitech.</p>
+  <p class="demo-note">Bật "giảm chuyển động" ở hệ điều hành, hoặc bấm nút ở đầu trang, để xem trạng thái dự phòng.</p>
+</footer>
+
+<script>
+/* ================= src/lib/effects.js ================= */
+/**
+ * ANMITECH — Bộ hiệu ứng (JavaScript thuần)
+ *
+ * Không phụ thuộc thư viện nào. Dùng được cho React, hoặc HTML tĩnh.
+ * Điều khiển bằng thuộc tính data-* trên HTML:
+ *
+ *   data-fx-reveal            hiện dần khi cuộn vào khung nhìn
+ *   data-fx-spotlight         vệt sáng đi theo con trỏ trong khối này
+ *   data-fx-hover-bg          rê chuột thì quầng sáng nền đậm lên
+ *   data-fx-marquee           tự nhân đôi danh sách con cho chạy vô hạn
+ *   data-fx-count="1200"      đếm số tăng dần khi lọt vào khung nhìn
+ *   data-fx-accordion         nhóm accordion (con: [data-fx-acc-item])
+ *   data-fx-words             tách chữ thành từng từ để hiện so le
+ *
+ * Cách dùng:
+ *   import { initEffects } from './lib/effects';
+ *   const cleanup = initEffects();     // gọi cleanup() khi unmount
+ */
+
+const REDUCED = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* -------------------------------------------------------------------------
+ * 1. Hiện dần khi cuộn
+ * ---------------------------------------------------------------------- */
+function initReveal(root = document) {
+  const items = root.querySelectorAll('[data-fx-reveal]');
+  if (!items.length) return () => {};
+
+  items.forEach((el) => el.classList.add('fx-reveal'));
+
+  // Không có IntersectionObserver, hoặc người dùng tắt chuyển động: hiện ngay.
+  if (!('IntersectionObserver' in window)) {
+    items.forEach((el) => el.classList.add('is-in'));
+    return () => {};
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target); // chỉ chạy một lần
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  items.forEach((el) => io.observe(el));
+  return () => io.disconnect();
+}
+
+/* -------------------------------------------------------------------------
+ * 2. Vệt sáng theo con trỏ
+ * ---------------------------------------------------------------------- */
+function initSpotlight(root = document) {
+  const zones = root.querySelectorAll('[data-fx-spotlight]');
+  if (!zones.length || REDUCED()) return () => {};
+
+  const offs = [];
+
+  zones.forEach((zone) => {
+    let glow = zone.querySelector('.fx-spotlight');
+    if (!glow) {
+      glow = document.createElement('div');
+      glow.className = 'fx-spotlight';
+      zone.appendChild(glow);
+    }
+    if (getComputedStyle(zone).position === 'static') zone.style.position = 'relative';
+
+    let raf = 0;
+    let x = 0;
+    let y = 0;
+
+    const move = (e) => {
+      const r = zone.getBoundingClientRect();
+      x = e.clientX - r.left;
+      y = e.clientY - r.top;
+      // Gom cập nhật vào 1 khung hình, tránh ghi style hàng trăm lần mỗi giây
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          glow.style.setProperty('--fx-x', x + 'px');
+          glow.style.setProperty('--fx-y', y + 'px');
+          raf = 0;
+        });
+      }
+    };
+    const enter = () => glow.classList.add('is-on');
+    const leave = () => {
+      glow.classList.remove('is-on');
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    };
+
+    zone.addEventListener('mousemove', move);
+    zone.addEventListener('mouseenter', enter);
+    zone.addEventListener('mouseleave', leave);
+
+    offs.push(() => {
+      zone.removeEventListener('mousemove', move);
+      zone.removeEventListener('mouseenter', enter);
+      zone.removeEventListener('mouseleave', leave);
+      if (raf) cancelAnimationFrame(raf);
+    });
+  });
+
+  return () => offs.forEach((f) => f());
+}
+
+/* -------------------------------------------------------------------------
+ * 3. Rê chuột làm đậm quầng sáng nền
+ * ---------------------------------------------------------------------- */
+function initHoverBg(root = document) {
+  const zones = root.querySelectorAll('[data-fx-hover-bg]');
+  if (!zones.length || REDUCED()) return () => {};
+
+  const offs = [];
+  zones.forEach((zone) => {
+    const bg = zone.querySelector('.fx-bg');
+    if (!bg) return;
+    const on = () => bg.classList.add('is-hovering');
+    const off = () => bg.classList.remove('is-hovering');
+    zone.addEventListener('mouseenter', on);
+    zone.addEventListener('mouseleave', off);
+    offs.push(() => {
+      zone.removeEventListener('mouseenter', on);
+      zone.removeEventListener('mouseleave', off);
+    });
+  });
+  return () => offs.forEach((f) => f());
+}
+
+/* -------------------------------------------------------------------------
+ * 4. Marquee — nhân đôi nội dung để chạy nối liền
+ * ---------------------------------------------------------------------- */
+function initMarquee(root = document) {
+  root.querySelectorAll('[data-fx-marquee]').forEach((el) => {
+    if (el.dataset.fxMarqueeReady) return;
+
+    const track = el.querySelector('.fx-marquee-track');
+    if (!track) return;
+
+    // Nhân đôi đúng một lần: keyframe chạy tới -50% nên cần 2 bản giống nhau.
+    const clone = track.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    [...clone.children].forEach((c) => c.setAttribute('aria-hidden', 'true'));
+    while (clone.firstChild) track.appendChild(clone.firstChild);
+
+    const speed = el.dataset.fxMarquee;
+    if (speed) track.style.setProperty('--fx-marquee-speed', speed);
+    if (el.dataset.fxMarqueeReverse !== undefined) track.classList.add('is-reverse');
+
+    el.dataset.fxMarqueeReady = '1';
+  });
+  return () => {};
+}
+
+/* -------------------------------------------------------------------------
+ * 5. Đếm số tăng dần
+ * ---------------------------------------------------------------------- */
+function initCount(root = document) {
+  const items = root.querySelectorAll('[data-fx-count]');
+  if (!items.length) return () => {};
+
+  const fmt = new Intl.NumberFormat('vi-VN');
+
+  const run = (el) => {
+    const to = parseFloat(el.dataset.fxCount) || 0;
+    const suffix = el.dataset.fxCountSuffix || '';
+    const dur = parseInt(el.dataset.fxCountDuration || '1400', 10);
+
+    if (REDUCED()) { el.textContent = fmt.format(to) + suffix; return; }
+
+    const t0 = performance.now();
+    const tick = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+      el.textContent = fmt.format(Math.round(to * eased)) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(run);
+    return () => {};
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      run(e.target);
+      io.unobserve(e.target);
+    }),
+    { threshold: 0.4 }
+  );
+  items.forEach((el) => io.observe(el));
+  return () => io.disconnect();
+}
+
+/* -------------------------------------------------------------------------
+ * 6. Accordion
+ *
+ * <div data-fx-accordion>
+ *   <div data-fx-acc-item>
+ *     <button class="fx-acc-trigger" aria-expanded="false">
+ *       Câu hỏi <svg class="fx-acc-icon">…</svg>
+ *     </button>
+ *     <div class="fx-acc-panel"><div>Nội dung</div></div>
+ *   </div>
+ * </div>
+ * ---------------------------------------------------------------------- */
+function initAccordion(root = document) {
+  const groups = root.querySelectorAll('[data-fx-accordion]');
+  if (!groups.length) return () => {};
+
+  const offs = [];
+
+  groups.forEach((group) => {
+    // Cho phép mở nhiều mục cùng lúc: data-fx-accordion="multi"
+    const multi = group.dataset.fxAccordion === 'multi';
+    const items = [...group.querySelectorAll('[data-fx-acc-item]')];
+
+    items.forEach((item) => {
+      const btn = item.querySelector('.fx-acc-trigger');
+      const panel = item.querySelector('.fx-acc-panel');
+      if (!btn || !panel) return;
+
+      btn.setAttribute('aria-expanded', 'false');
+
+      const setOpen = (open) => {
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+          // Đo chiều cao thật rồi gán, để transition chạy được (auto không animate)
+          panel.style.setProperty('--fx-h', panel.scrollHeight + 'px');
+          panel.classList.add('is-open');
+        } else {
+          panel.classList.remove('is-open');
+        }
+      };
+
+      const onClick = () => {
+        const willOpen = btn.getAttribute('aria-expanded') !== 'true';
+        if (!multi) items.forEach((other) => {
+          if (other === item) return;
+          const b = other.querySelector('.fx-acc-trigger');
+          const p = other.querySelector('.fx-acc-panel');
+          if (b && p) { b.setAttribute('aria-expanded', 'false'); p.classList.remove('is-open'); }
+        });
+        setOpen(willOpen);
+      };
+
+      btn.addEventListener('click', onClick);
+      offs.push(() => btn.removeEventListener('click', onClick));
+    });
+  });
+
+  // Cửa sổ đổi kích thước thì chiều cao panel đang mở cũng đổi theo
+  const onResize = () => {
+    root.querySelectorAll('.fx-acc-panel.is-open').forEach((p) => {
+      p.style.setProperty('--fx-h', p.scrollHeight + 'px');
+    });
+  };
+  window.addEventListener('resize', onResize);
+  offs.push(() => window.removeEventListener('resize', onResize));
+
+  return () => offs.forEach((f) => f());
+}
+
+/* -------------------------------------------------------------------------
+ * 7. Tách chữ thành từng từ để hiện so le
+ * ---------------------------------------------------------------------- */
+function initWords(root = document) {
+  root.querySelectorAll('[data-fx-words]').forEach((el) => {
+    if (el.dataset.fxWordsReady) return;
+
+    const words = (el.textContent || '').trim().split(/\s+/);
+    el.textContent = '';
+    words.forEach((w, i) => {
+      const span = document.createElement('span');
+      span.className = 'fx-word';
+      span.style.setProperty('--i', String(i));
+      span.textContent = w;
+      el.appendChild(span);
+      if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+
+    el.dataset.fxWordsReady = '1';
+  });
+  return () => {};
+}
+
+/* -------------------------------------------------------------------------
+ * 8. Đánh chữ (typewriter)
+ *
+ * <span data-fx-type='["Website doanh nghiệp","Website bán hàng","Web App"]'
+ *       data-fx-type-speed="70"      tốc độ gõ (ms/ký tự)
+ *       data-fx-type-pause="1600">   dừng bao lâu trước khi xoá
+ * </span>
+ *
+ * Gõ từng ký tự, dừng lại cho đọc, xoá ngược rồi sang cụm tiếp theo. Lặp vô hạn.
+ * ---------------------------------------------------------------------- */
+function initType(root = document) {
+  const items = root.querySelectorAll('[data-fx-type]');
+  if (!items.length) return () => {};
+
+  const timers = [];
+
+  items.forEach((el) => {
+    let phrases;
+    try {
+      phrases = JSON.parse(el.dataset.fxType);
+    } catch (e) {
+      phrases = [el.dataset.fxType];
+    }
+    if (!Array.isArray(phrases) || !phrases.length) return;
+
+    // Chừa sẵn chiều rộng bằng cụm dài nhất để dòng chữ không nhảy khi gõ
+    const longest = phrases.reduce((a, b) => (b.length > a.length ? b : a), '');
+    el.style.minWidth = longest.length + 'ch';
+    el.style.display = 'inline-block';
+
+    let out = el.querySelector('.fx-type-text');
+    if (!out) {
+      out = document.createElement('span');
+      out.className = 'fx-type-text';
+      el.textContent = '';
+      el.appendChild(out);
+      const caret = document.createElement('span');
+      caret.className = 'fx-type-caret';
+      caret.setAttribute('aria-hidden', 'true');
+      el.appendChild(caret);
+    }
+
+    // Tắt chuyển động: hiện thẳng cụm đầu tiên, không gõ.
+    if (REDUCED() && !document.documentElement.classList.contains('fx-force-motion')) {
+      out.textContent = phrases[0];
+      return;
+    }
+
+    const speed = parseInt(el.dataset.fxTypeSpeed || '70', 10);
+    const pause = parseInt(el.dataset.fxTypePause || '1600', 10);
+    let pi = 0;
+    let ci = 0;
+    let deleting = false;
+
+    const step = () => {
+      const text = phrases[pi];
+      ci += deleting ? -1 : 1;
+      out.textContent = text.slice(0, ci);
+
+      let wait = deleting ? speed / 2 : speed;
+
+      if (!deleting && ci === text.length) {
+        deleting = true;
+        wait = pause;
+      } else if (deleting && ci === 0) {
+        deleting = false;
+        pi = (pi + 1) % phrases.length;
+        wait = speed * 3;
+      }
+
+      timers.push(setTimeout(step, wait));
+    };
+
+    timers.push(setTimeout(step, 400));
+  });
+
+  return () => timers.forEach(clearTimeout);
+}
+
+/* -------------------------------------------------------------------------
+ * Khởi tạo tất cả
+ * ---------------------------------------------------------------------- */
+function initEffects(root = document) {
+  const cleanups = [
+    initWords(root),
+    initReveal(root),
+    initSpotlight(root),
+    initHoverBg(root),
+    initMarquee(root),
+    initCount(root),
+    initAccordion(root),
+    initType(root),
+  ];
+  return () => cleanups.forEach((fn) => typeof fn === 'function' && fn());
+}
+
+/**
+ * Bật cưỡng bức chuyển động, bỏ qua thiết lập "giảm chuyển động" của hệ điều hành.
+ * Chỉ dùng khi người xem chủ động yêu cầu — ví dụ nút trong trang demo.
+ */
+function forceMotion(on = true) {
+  document.documentElement.classList.toggle('fx-force-motion', !!on);
+}
+
+
+/* ================= JS rieng cua demo ================= */
+  var root = document.documentElement;
+
+  // QUAN TRONG: bat cuong buc chuyen dong cho trang demo.
+  // May dang bat "giam chuyen dong" thi moi hieu ung se bi tat, va nguoi xem
+  // chi thay chu hien ra chu khong thay truot / danh chu / marquee chay.
+  var heThongDangTat = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('fx-force-motion');
+  if (heThongDangTat) {
+    var warn = document.getElementById('motionWarn');
+    if (warn) warn.hidden = false;
+  }
+
+  // Cac bien the reveal khai bao qua data-fx-reveal-variant
+  document.querySelectorAll('[data-fx-reveal-variant]').forEach(function (el) {
+    el.classList.add('fx-reveal-' + el.getAttribute('data-fx-reveal-variant'));
+  });
+
+  var cleanup = initEffects(document);
+
+  // ---- Toc do ----
+  var sel = document.getElementById('selSpeed');
+  function applySpeed(v) {
+    root.style.setProperty('--fx-speed', v);
+    try { localStorage.setItem('demo-speed', v); } catch (e) {}
+  }
+  var savedSpeed = null;
+  try { savedSpeed = localStorage.getItem('demo-speed'); } catch (e) {}
+  if (savedSpeed && sel) sel.value = savedSpeed;
+  applySpeed(sel ? sel.value : '2');
+  if (sel) sel.addEventListener('change', function () { applySpeed(sel.value); replay(); });
+
+  // ---- Phat lai ----
+  // Cac hieu ung mot lan da chay xong va IntersectionObserver da ngat theo doi.
+  // Muon xem lai phai xoa dau vet roi khoi tao lai tu dau.
+  function restart(el) {
+    el.style.animation = 'none';
+    void el.offsetWidth;          // buoc trinh duyet tinh lai, neu khong se khong chay lai
+    el.style.animation = '';
+  }
+  function replay() {
+    cleanup();
+    document.querySelectorAll('.fx-reveal.is-in').forEach(function (el) { el.classList.remove('is-in'); });
+    document.querySelectorAll('.fx-karaoke, .fx-word').forEach(restart);
+    document.querySelectorAll('[data-fx-count]').forEach(function (el) { el.textContent = '0'; });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    cleanup = initEffects(document);
+  }
+  var btnReplay = document.getElementById('btnReplay');
+  if (btnReplay) btnReplay.addEventListener('click', replay);
+
+  // ---- Giao dien sang / toi ----
+  var btnTheme = document.getElementById('btnTheme');
+  function syncThemeLabel() {
+    if (btnTheme) btnTheme.textContent = 'Giao dien: ' + (root.getAttribute('data-theme') === 'dark' ? 'Toi' : 'Sang');
+  }
+  syncThemeLabel();
+  if (btnTheme) btnTheme.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('nlw-theme', next); } catch (e) {}
+    syncThemeLabel();
+  });
+
+  // ---- Mo phong giam chuyen dong ----
+  // Nut nay tat che do cuong buc de xem dung trang thai khach se gap
+  var btnMotion = document.getElementById('btnMotion');
+  if (btnMotion) btnMotion.addEventListener('click', function () {
+    var tat = root.classList.toggle('demo-no-motion');
+    root.classList.toggle('fx-force-motion', !tat);
+    btnMotion.textContent = tat ? 'Bat lai chuyen dong' : 'Thu giam chuyen dong';
+    if (!tat) replay();
+  });
+</script>
+</body>
+</html>

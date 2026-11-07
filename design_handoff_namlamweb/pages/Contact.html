@@ -1,0 +1,193 @@
+<!-- @dsCard group="Website" viewport="1440x820" name="Liên hệ (hi-fi)" subtitle="Kênh liên hệ nổi bật + form phụ + bản đồ" -->
+<!--
+  Hallmark · macrostructure: Split Contact · genre: modern-minimal · theme: brand-locked (Nam làm WEB DS)
+  gradient: none · priority action: Zalo/Messenger (prominent), form secondary · eyebrows: 1 · motion: reveal
+-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liên hệ — Nam làm WEB</title>
+<link rel="icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../styles.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{font-family:var(--font-body);color:var(--text);background:var(--white);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--font-heading);line-height:var(--lh-heading);font-weight:var(--fw-black);color:var(--brand-900);overflow-wrap:anywhere}
+a{color:var(--brand-500);text-decoration:none}a:hover{color:var(--brand-700)}
+img{display:block;max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.eyebrow{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+.ic{width:18px;height:18px;background:currentColor;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat;flex:none}
+.ic-zalo{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 3C6.5 3 2 6.7 2 11.3c0 2.6 1.4 4.9 3.7 6.4-.2.9-.7 2.2-1 2.9-.2.4.1.7.5.6 1.6-.5 3.2-1.2 3.9-1.6 1 .2 1.9.3 2.9.3 5.5 0 10-3.7 10-8.3S17.5 3 12 3z'/%3E%3C/svg%3E")}
+.ic-mess{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2C6.3 2 2 6.2 2 11.6c0 2.9 1.3 5.5 3.4 7.2V22l3.1-1.7c.8.2 1.7.3 2.5.3 5.7 0 10-4.2 10-9.6S17.7 2 12 2zm1 12.3l-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.8-2.7-5.3 5.7z'/%3E%3C/svg%3E")}
+.ic-arr{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2.2' d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E")}
+.ic-phone{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2' d='M4 5c0 8 7 15 15 15l-.5-4-4-1-2 2c-3-1.5-5.5-4-7-7l2-2-1-4z'/%3E%3C/svg%3E")}
+.ic-mail{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='5' width='18' height='14' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath fill='none' stroke='black' stroke-width='2' d='M3 6l9 7 9-7'/%3E%3C/svg%3E")}
+.ic-pin{--m:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2' d='M12 21c5-5.5 7-9 7-12a7 7 0 10-14 0c0 3 2 6.5 7 12z'/%3E%3Ccircle cx='12' cy='9' r='2.5' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:var(--fs-button);padding:14px 26px;border:1.5px solid transparent;cursor:pointer;line-height:1;transition:background .16s,color .16s,transform .12s,border-color .16s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--brand-500);color:#fff}.btn-primary:hover{background:var(--brand-700);color:#fff}
+.btn-lg{padding:16px 30px;font-size:16px}
+.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hd{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.hd .row{display:flex;align-items:center;justify-content:space-between;height:74px}
+.hd .logo{height:30px}
+.hd nav{display:flex;gap:6px}
+.hd nav a{font-family:var(--font-heading);font-weight:var(--fw-semibold);font-size:15px;color:var(--text);padding:8px 14px;border-bottom:2px solid transparent}
+.hd nav a:hover{color:var(--brand-500)}
+.hd nav a.on{color:var(--brand-900);border-bottom-color:var(--brand-500)}
+.hd .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;padding:8px}
+.hd .burger i{width:24px;height:2px;background:var(--brand-900);display:block}
+
+/* hero */
+.ch{padding:72px 0 44px}
+.ch h1{font-size:var(--fs-display);line-height:1.1;margin:14px 0 16px;letter-spacing:-.01em}
+.ch p{color:var(--text-muted);font-size:19px;max-width:54ch}
+
+/* contact grid */
+.cgrid{padding-bottom:88px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
+.col-h{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-900);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.col-h::before{content:"";width:10px;height:10px;background:var(--brand-500);flex:none}
+
+/* channels (prominent) */
+.chans{display:flex;flex-direction:column;gap:14px}
+.chan{display:flex;gap:18px;align-items:center;padding:24px 26px;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.chan:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.chan .cih{width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex:none}
+.chan .cih .ic{width:26px;height:26px}
+.chan b{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:19px;display:block;margin-bottom:2px}
+.chan .sub{font-size:14px}
+.chan .go{margin-left:auto}.chan .go .ic{width:22px;height:22px}
+.chan.zalo{background:var(--brand-500);color:#fff}
+.chan.zalo .cih{background:rgba(255,255,255,.18)}.chan.zalo .cih .ic{color:#fff}
+.chan.zalo b{color:#fff}.chan.zalo .sub{color:rgba(255,255,255,.88)}.chan.zalo .go .ic{color:#fff}
+.chan.mess{background:var(--brand-700);color:#fff}
+.chan.mess .cih{background:rgba(255,255,255,.18)}.chan.mess .cih .ic{color:#fff}
+.chan.mess b{color:#fff}.chan.mess .sub{color:rgba(255,255,255,.88)}.chan.mess .go .ic{color:#fff}
+.chan.alt{background:#fff;border:1px solid var(--border);padding:20px 24px}
+.chan.alt .cih{width:46px;height:46px;background:var(--brand-50)}.chan.alt .cih .ic{color:var(--brand-500);width:22px;height:22px}
+.chan.alt b{color:var(--brand-900);font-size:16px}.chan.alt .sub{color:var(--text-muted)}
+.hours{margin-top:18px;color:var(--text-muted);font-size:14px;display:flex;gap:8px;align-items:center}
+.hours::before{content:"";width:8px;height:8px;background:var(--success);border-radius:50%}
+
+/* form (secondary) */
+.form{background:var(--surface-alt);border:1px solid var(--border);padding:34px}
+.form .note{color:var(--text-muted);font-size:15px;margin-bottom:24px}
+.field{margin-bottom:18px}
+.field label{display:block;font-family:var(--font-heading);font-weight:var(--fw-semibold);font-size:13px;color:var(--brand-900);margin-bottom:7px}
+.field input,.field textarea{width:100%;border:1px solid var(--border);background:#fff;padding:13px 14px;font-family:var(--font-body);font-size:15px;color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s}
+.field input::placeholder,.field textarea::placeholder{color:#9fb0b8}
+.field input:focus,.field textarea:focus{border-color:var(--brand-500);box-shadow:0 0 0 3px rgba(2,126,166,.12)}
+.field textarea{resize:vertical;min-height:120px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form .btn{width:100%;justify-content:center;margin-top:6px}
+.form .fine{color:var(--text-muted);font-size:13px;margin-top:14px;text-align:center}
+
+/* map */
+.map-sec{padding-bottom:88px}
+.map{height:320px;background:repeating-linear-gradient(135deg,#EAEFF2 0 18px,#E3EAEE 18px 36px);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:#93a7b0;font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+
+.ft{background:var(--brand-900);color:#fff;padding:64px 0 30px}
+.ft .cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
+.ft .logo{height:28px;margin-bottom:16px}
+.ft p{color:#9db6c0;font-size:14px;margin-bottom:8px}
+.ft .tag{color:var(--accent);font-family:var(--font-heading);font-weight:var(--fw-bold)}
+.ft h5{font-family:var(--font-heading);font-weight:var(--fw-bold);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.ft ul{list-style:none}.ft li{margin-bottom:10px}
+.ft li a{color:#9db6c0;font-size:14px}.ft li a:hover{color:#fff}
+.ft .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#6f8a94;font-size:13px}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease,ease),transform .6s var(--ease,ease)}
+.rv.in{opacity:1;transform:none}
+@media(max-width:900px){
+  .hd nav,.hd .cta-h{display:none}.hd .burger{display:flex}
+  .cgrid{grid-template-columns:1fr;gap:40px}
+  .two{grid-template-columns:1fr}
+  .ft .cols{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){.rv{transition:opacity .15s;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="wrap row">
+    <a href="index.html"><img class="logo" src="../assets/logo-horizontal.png" alt="Nam làm WEB"></a>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="About.html">Giới thiệu</a>
+      <a href="#">Dịch vụ</a>
+      <a href="Projects.html">Dự án</a>
+      <a href="#" class="on">Liên hệ</a>
+    </nav>
+    <div class="cta-h"><a class="btn btn-primary" href="#"><span class="ic ic-zalo"></span>Nhắn Zalo</a></div>
+    <button class="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="ch">
+  <div class="wrap">
+    <div class="eyebrow">Liên hệ</div>
+    <h1>Nói chuyện trực tiếp với tôi</h1>
+    <p>Cách nhanh nhất là nhắn Zalo hoặc Messenger — tôi thường trả lời trong ngày. Bạn cũng có thể để lại thông tin, tôi sẽ liên hệ lại.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="wrap cgrid">
+  <!-- Channels (prominent) -->
+  <div class="rv">
+    <div class="col-h">Cách nhanh nhất</div>
+    <div class="chans">
+      <a class="chan zalo" href="#"><span class="cih"><span class="ic ic-zalo"></span></span><span><b>Nhắn Zalo</b><span class="sub">09xx xxx xxx · trả lời trong ngày</span></span><span class="go"><span class="ic ic-arr"></span></span></a>
+      <a class="chan mess" href="#"><span class="cih"><span class="ic ic-mess"></span></span><span><b>Nhắn Messenger</b><span class="sub">facebook.com/namlamweb</span></span><span class="go"><span class="ic ic-arr"></span></span></a>
+      <a class="chan alt" href="#"><span class="cih"><span class="ic ic-phone"></span></span><span><b>Gọi hotline</b><span class="sub">1900 xxxx</span></span><span class="go"><span class="ic ic-arr"></span></span></a>
+      <a class="chan alt" href="#"><span class="cih"><span class="ic ic-mail"></span></span><span><b>Gửi email</b><span class="sub">hello@namlamweb.com</span></span><span class="go"><span class="ic ic-arr"></span></span></a>
+    </div>
+    <div class="hours">Đang nhận dự án · Thứ 2 – Thứ 7, 8:00 – 20:00</div>
+  </div>
+
+  <!-- Form (secondary) -->
+  <div class="rv">
+    <div class="col-h">Hoặc để lại thông tin</div>
+    <form class="form" onsubmit="return false">
+      <p class="note">Điền nhanh vài thông tin, tôi sẽ chủ động liên hệ lại với bạn.</p>
+      <div class="two">
+        <div class="field"><label for="ten">Họ và tên</label><input id="ten" type="text" placeholder="Nguyễn Văn A"></div>
+        <div class="field"><label for="sdt">Số điện thoại / Zalo</label><input id="sdt" type="tel" placeholder="09xx xxx xxx"></div>
+      </div>
+      <div class="field"><label for="em">Email (không bắt buộc)</label><input id="em" type="email" placeholder="ban@email.com"></div>
+      <div class="field"><label for="nd">Bạn cần gì?</label><textarea id="nd" placeholder="Mô tả ngắn về website bạn muốn làm, lĩnh vực kinh doanh…"></textarea></div>
+      <button class="btn btn-primary btn-lg" type="submit">Gửi thông tin<span class="ic ic-arr"></span></button>
+      <div class="fine">Thông tin của bạn chỉ dùng để liên hệ tư vấn.</div>
+    </form>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="wrap map-sec">
+  <div class="col-h rv"><span class="ic ic-pin" style="width:18px;height:18px;background:var(--brand-500)"></span>Khu vực làm việc</div>
+  <div class="map rv">Bản đồ (tùy chọn)</div>
+</section>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="cols">
+      <div><img class="logo" src="../assets/logo-horizontal-white.png" alt="Nam làm WEB"><p>Xây dựng niềm tin cho doanh nghiệp thông qua website.</p><p class="tag">Hiểu đúng. Làm đúng.</p></div>
+      <div><h5>Điều hướng</h5><ul><li><a href="index.html">Trang chủ</a></li><li><a href="About.html">Giới thiệu</a></li><li><a href="#">Dịch vụ</a></li><li><a href="Projects.html">Dự án</a></li><li><a href="#">Liên hệ</a></li></ul></div>
+      <div><h5>Liên hệ</h5><ul><li><a href="#">Zalo: 09xx xxx xxx</a></li><li><a href="#">Messenger</a></li><li><a href="#">Hotline: 1900 xxxx</a></li><li><a href="#">hello@namlamweb.com</a></li></ul></div>
+      <div><h5>Bắt đầu ngay</h5><p>Nhắn tin để được tư vấn miễn phí, không ràng buộc.</p><a class="btn btn-primary" href="#" style="margin-top:8px"><span class="ic ic-zalo"></span>Nhắn Zalo</a></div>
+    </div>
+    <div class="bottom"><span>© 2026 Nam làm WEB</span><span>namlamweb.com</span></div>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

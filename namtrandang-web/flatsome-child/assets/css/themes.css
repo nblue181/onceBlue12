@@ -1,0 +1,323 @@
+/* =========================================================================
+   Nam làm WEB — Hệ hai giao diện Sáng / Tối, nền "Aura"
+
+   Nạp SAU theme.css. Giao diện được chọn bằng thuộc tính trên thẻ <html>:
+       <html data-theme="light">   hoặc   <html data-theme="dark">
+
+   theme.css giữ nguyên toàn bộ bản sáng gốc. File này chỉ thêm lớp nền aura
+   và các khác biệt của bản tối, nên bỏ enqueue 'nlw-themes' là quay về y như cũ.
+
+   Khác bản gốc một điểm: KHÔNG dùng filter: blur(). Trang có 2 section
+   scroll-driven; blur 180px trên lớp phủ toàn màn hình khiến trình duyệt vẽ
+   lại mỗi khung hình và gây giật khi cuộn. Radial-gradient mềm sẵn cho kết quả
+   thị giác gần như y hệt mà không tốn chi phí đó.
+   ====================================================================== */
+
+/* -------------------------------------------------------------------------
+   1. Biến của aura theo từng giao diện
+   ---------------------------------------------------------------------- */
+
+:root,
+html[data-theme="light"] {
+  --aura-dot: rgba(2, 126, 166, 0.16);
+  --aura-glow-1: rgba(107, 223, 238, 0.42);
+  --aura-glow-2: rgba(2, 126, 166, 0.14);
+  --aura-blend: normal;
+}
+
+html[data-theme="dark"] {
+  --aura-dot: rgba(107, 223, 238, 0.16);
+  --aura-glow-1: rgba(2, 126, 166, 0.55);
+  --aura-glow-2: rgba(107, 223, 238, 0.28);
+  --aura-blend: screen;
+}
+
+/* -------------------------------------------------------------------------
+   2. Ba lớp nền — dùng chung cho cả hai giao diện
+   ---------------------------------------------------------------------- */
+
+/* Lớp 2 + 3: hai quầng sáng. position:fixed để đứng yên khi cuộn. */
+body.nlw::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 40% 38%, var(--aura-glow-1) 0%, transparent 55%),
+    radial-gradient(circle at 72% 68%, var(--aura-glow-2) 0%, transparent 45%);
+  mix-blend-mode: var(--aura-blend);
+}
+
+/* Lớp 1: lưới chấm */
+body.nlw::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--aura-dot) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Flatsome đặt nền trắng đặc cho #wrapper và #main. Hai lớp này phủ kín body
+   nên che mất toàn bộ aura — phải cho trong suốt ở CẢ HAI giao diện, để màu
+   nền do body quyết định. */
+body.nlw #wrapper,
+body.nlw #main,
+body.nlw .page-wrapper {
+  background-color: transparent;
+}
+
+/* Nội dung luôn nằm trên các lớp nền */
+body.nlw #header,
+body.nlw #content,
+body.nlw #footer,
+body.nlw .nlw-float {
+  position: relative;
+  z-index: 1;
+}
+
+/* -------------------------------------------------------------------------
+   3. GIAO DIỆN SÁNG — chỉ mở nền cho các section vốn nền sáng.
+      Các dải tối (Dự án, Quy trình, Tầm nhìn, Footer) giữ nguyên navy đặc
+      để không mất nhịp đan xen sáng - tối đã dựng.
+   ---------------------------------------------------------------------- */
+
+html[data-theme="light"] body.nlw { background-color: #FFFFFF; }
+
+html[data-theme="light"] body.nlw .nlw-alt,
+html[data-theme="light"] body.nlw .nlw-values.is-light,
+html[data-theme="light"] body.nlw .nlw-services-hub {
+  background: rgba(0, 39, 53, 0.035);
+}
+
+/* Bản sáng KHÔNG cần khai báo lại màu chữ: theme.css đã lo, và các quy tắc của
+   bản tối đều gắn tiền tố html[data-theme="dark"] nên không đụng tới.
+   Từng thử thêm một khối "khẳng định lại" ở đây và nó phản tác dụng — quy tắc
+   quét chung h1…h5 và a có độ ưu tiên cao hơn các quy tắc riêng của dải tối,
+   làm tiêu đề section Dự án / Quy trình thành navy trên nền navy. */
+
+/* -------------------------------------------------------------------------
+   4. GIAO DIỆN TỐI
+   ---------------------------------------------------------------------- */
+
+html[data-theme="dark"] body.nlw {
+  background-color: var(--brand-900);
+  color: var(--text);
+
+  --surface: #06303F;
+  --surface-alt: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.14);
+  --text: #D7E5EB;
+  --text-muted: #9DB6C0;
+  --accent-text: #6BDFEE;
+}
+
+/* Bỏ nền đặc để lộ lớp aura */
+html[data-theme="dark"] body.nlw .nlw-alt,
+html[data-theme="dark"] body.nlw .nlw-values,
+html[data-theme="dark"] body.nlw .nlw-values.is-light,
+html[data-theme="dark"] body.nlw .nlw-vision,
+html[data-theme="dark"] body.nlw .nlw-pjx,
+html[data-theme="dark"] body.nlw .nlw-proc,
+html[data-theme="dark"] body.nlw .nlw-ft,
+html[data-theme="dark"] body.nlw .nlw-services-hub {
+  background: transparent;
+}
+
+/* Dải CTA giữ nền đặc — đây là điểm nhấn chuyển đổi, cần nổi khỏi nền */
+html[data-theme="dark"] body.nlw .nlw-cta {
+  background: linear-gradient(180deg, var(--brand-500) 0%, #013E56 100%);
+}
+
+/* ---- Chữ ---- */
+html[data-theme="dark"] body.nlw :where(h1, h2, h3, h4, h5) { color: #FFFFFF; }
+html[data-theme="dark"] body.nlw a { color: var(--accent); }
+html[data-theme="dark"] body.nlw a:hover { color: #FFFFFF; }
+
+html[data-theme="dark"] body.nlw .nlw-quote,
+html[data-theme="dark"] body.nlw .nlw-qlist li,
+html[data-theme="dark"] body.nlw .nlw-tier-name,
+html[data-theme="dark"] body.nlw .nlw-meta-v,
+html[data-theme="dark"] body.nlw .nlw-chan-alt b,
+html[data-theme="dark"] body.nlw .nlw-schip,
+html[data-theme="dark"] body.nlw .nlw-col-h,
+html[data-theme="dark"] body.nlw .nlw-ocard-nm,
+html[data-theme="dark"] body.nlw .nlw-res b,
+html[data-theme="dark"] body.nlw .nlw-active-filter b,
+html[data-theme="dark"] body.nlw .nlw-pcard-info b,
+html[data-theme="dark"] body.nlw .nlw-rp-meta b,
+html[data-theme="dark"] body.nlw .nlw-feats li,
+html[data-theme="dark"] body.nlw .nlw-chip { color: #FFFFFF; }
+
+html[data-theme="dark"] body.nlw .nlw-intro-side,
+html[data-theme="dark"] body.nlw .nlw-eyebrow,
+html[data-theme="dark"] body.nlw .nlw-values.is-light .nlw-eyebrow,
+html[data-theme="dark"] body.nlw .nlw-values.is-light .nlw-v-n,
+html[data-theme="dark"] body.nlw .nlw-more,
+html[data-theme="dark"] body.nlw .nlw-ocard-go,
+html[data-theme="dark"] body.nlw .nlw-ocard-fr b,
+html[data-theme="dark"] body.nlw .nlw-way-s,
+html[data-theme="dark"] body.nlw .nlw-tl-sub { color: var(--accent); }
+
+html[data-theme="dark"] body.nlw .nlw-values.is-light h2,
+html[data-theme="dark"] body.nlw .nlw-values.is-light .nlw-v h4 { color: #FFFFFF; }
+html[data-theme="dark"] body.nlw .nlw-values.is-light .nlw-v p { color: var(--on-dark-muted); }
+
+html[data-theme="dark"] body.nlw .nlw-vrow-n,
+html[data-theme="dark"] body.nlw .nlw-card-no,
+html[data-theme="dark"] body.nlw .nlw-ocard-n,
+html[data-theme="dark"] body.nlw .nlw-rsv-no { color: rgba(107, 223, 238, 0.45); }
+
+/* ---- Bề mặt thẻ ---- */
+html[data-theme="dark"] body.nlw .nlw-card,
+html[data-theme="dark"] body.nlw .nlw-tier,
+html[data-theme="dark"] body.nlw .nlw-pcard,
+html[data-theme="dark"] body.nlw .nlw-rp,
+html[data-theme="dark"] body.nlw .nlw-rpj a,
+html[data-theme="dark"] body.nlw .nlw-rsv a,
+html[data-theme="dark"] body.nlw .nlw-ocard,
+html[data-theme="dark"] body.nlw .nlw-chip,
+html[data-theme="dark"] body.nlw .nlw-chan-alt,
+html[data-theme="dark"] body.nlw .nlw-values.is-light .nlw-v,
+html[data-theme="dark"] body.nlw .nlw-form {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: var(--border);
+}
+
+html[data-theme="dark"] body.nlw .nlw-values.is-light .nlw-vgrid {
+  background: var(--border);
+  border-color: var(--border);
+}
+
+html[data-theme="dark"] body.nlw .nlw-card:hover,
+html[data-theme="dark"] body.nlw .nlw-pcard:hover,
+html[data-theme="dark"] body.nlw .nlw-rp:hover,
+html[data-theme="dark"] body.nlw .nlw-ocard:hover,
+html[data-theme="dark"] body.nlw .nlw-rpj a:hover,
+html[data-theme="dark"] body.nlw .nlw-rsv a:hover {
+  background: rgba(255, 255, 255, 0.075);
+  border-color: rgba(107, 223, 238, 0.45);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] body.nlw .nlw-card-ico,
+html[data-theme="dark"] body.nlw .nlw-ck,
+html[data-theme="dark"] body.nlw .nlw-chan-alt .nlw-chan-ico,
+html[data-theme="dark"] body.nlw .nlw-values.is-light .nlw-v-ico {
+  background: rgba(107, 223, 238, 0.14);
+}
+html[data-theme="dark"] body.nlw .nlw-card-ico .nlw-ic,
+html[data-theme="dark"] body.nlw .nlw-ck .nlw-ic,
+html[data-theme="dark"] body.nlw .nlw-chan-alt .nlw-chan-ico .nlw-ic,
+html[data-theme="dark"] body.nlw .nlw-values.is-light .nlw-v-ico .nlw-ic { background: var(--accent); }
+
+html[data-theme="dark"] body.nlw .nlw-dur { background: rgba(255, 255, 255, 0.06); }
+
+html[data-theme="dark"] body.nlw .nlw-shot {
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0 16px, rgba(255, 255, 255, 0.07) 16px 32px);
+  color: rgba(255, 255, 255, 0.4);
+}
+html[data-theme="dark"] body.nlw .nlw-shot-has { background: none; }
+html[data-theme="dark"] body.nlw .nlw-map {
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0 18px, rgba(255, 255, 255, 0.07) 18px 36px);
+}
+
+/* ---- Header, nút, form ---- */
+html[data-theme="dark"] body.nlw #header .header-wrapper {
+  background: rgba(0, 39, 53, 0.88);
+  border-bottom-color: var(--border);
+}
+html[data-theme="dark"] body.nlw #header .header-nav > li > a { color: var(--text); }
+html[data-theme="dark"] body.nlw #header .header-nav > li > a:hover { color: var(--accent); }
+html[data-theme="dark"] body.nlw #header .header-nav > li.current-menu-item > a,
+html[data-theme="dark"] body.nlw #header .header-nav > li.current-menu-parent > a,
+html[data-theme="dark"] body.nlw #header .header-nav > li.active > a {
+  color: #FFFFFF;
+  border-bottom-color: var(--accent);
+}
+
+html[data-theme="dark"] body.nlw .nlw-btn-ghost { border-color: var(--border); color: #FFFFFF; }
+html[data-theme="dark"] body.nlw .nlw-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Nút nền trắng nằm trên dải gradient/brand: quy tắc `a { color: accent }` của
+   bản tối có độ ưu tiên cao hơn .nlw-btn-onbrand nên làm chữ cyan trên nền
+   trắng (tương phản 1.57). Khai báo lại rõ ràng cho từng loại nút. */
+html[data-theme="dark"] body.nlw .nlw-btn-onbrand,
+html[data-theme="dark"] body.nlw .nlw-btn-onbrand:hover { color: var(--brand-700); }
+html[data-theme="dark"] body.nlw .nlw-btn-primary,
+html[data-theme="dark"] body.nlw .nlw-btn-primary:hover,
+html[data-theme="dark"] body.nlw .nlw-btn-white-out,
+html[data-theme="dark"] body.nlw .nlw-btn-white-out:hover { color: #FFFFFF; }
+
+html[data-theme="dark"] body.nlw .nlw-fchip { color: var(--text-muted); border-color: var(--border); }
+html[data-theme="dark"] body.nlw .nlw-fchip:hover { border-color: var(--accent); color: var(--accent); }
+
+html[data-theme="dark"] body.nlw .nlw-pager .nlw-pg,
+html[data-theme="dark"] body.nlw .nlw-pager span.nlw-pg {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+html[data-theme="dark"] body.nlw .nlw-form input[type="text"],
+html[data-theme="dark"] body.nlw .nlw-form input[type="tel"],
+html[data-theme="dark"] body.nlw .nlw-form input[type="email"],
+html[data-theme="dark"] body.nlw .nlw-form select,
+html[data-theme="dark"] body.nlw .nlw-form textarea {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: var(--border);
+  color: var(--text);
+}
+html[data-theme="dark"] body.nlw .nlw-form label { color: #FFFFFF; }
+html[data-theme="dark"] body.nlw .nlw-form input::placeholder,
+html[data-theme="dark"] body.nlw .nlw-form textarea::placeholder { color: rgba(255, 255, 255, 0.38); }
+
+html[data-theme="dark"] body.nlw .nlw-vlist,
+html[data-theme="dark"] body.nlw .nlw-vrow,
+html[data-theme="dark"] body.nlw .nlw-meta-inline,
+html[data-theme="dark"] body.nlw .nlw-blurb { border-color: var(--border); }
+
+html[data-theme="dark"] body.nlw .nlw-tl-node { background: #01303F; }
+
+/* -------------------------------------------------------------------------
+   5. Nút chuyển giao diện
+   ---------------------------------------------------------------------- */
+
+.nlw-ic-sun  { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.5' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath fill='none' stroke='black' stroke-width='2' stroke-linecap='round' d='M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8'/%3E%3C/svg%3E"); }
+.nlw-ic-moon { --m: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2' stroke-linejoin='round' d='M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z'/%3E%3C/svg%3E"); }
+
+.nlw-theme-toggle {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--brand-900);
+  cursor: pointer;
+  padding: 0;
+  box-shadow: var(--shadow-md);
+  transition: background var(--t-color) ease, color var(--t-color) ease, transform 0.15s ease;
+}
+.nlw-theme-toggle:hover { transform: translateY(-2px); }
+.nlw-theme-toggle .nlw-ic { width: 22px; height: 22px; }
+
+/* Hiện mặt trăng khi đang sáng (bấm để sang tối) và ngược lại */
+.nlw-theme-toggle .nlw-ic-sun { display: none; }
+html[data-theme="dark"] .nlw-theme-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border);
+  color: var(--accent);
+}
+html[data-theme="dark"] .nlw-theme-toggle .nlw-ic-sun { display: block; }
+html[data-theme="dark"] .nlw-theme-toggle .nlw-ic-moon { display: none; }
+
+/* Đặt trong cụm nút nổi: nằm trên nút Zalo */
+.nlw-float .nlw-theme-toggle { order: -1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nlw-theme-toggle:hover { transform: none; }
+}

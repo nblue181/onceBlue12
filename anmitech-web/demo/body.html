@@ -1,0 +1,250 @@
+<!-- Phần thân của trang demo. build-demo.ps1 sẽ nhúng CSS và JS thật vào đây. -->
+
+<div class="demo-bar">
+  <strong>ANMITECH — Demo hiệu ứng</strong>
+
+  <label class="demo-ctl">
+    Tốc độ
+    <select id="selSpeed" class="demo-select">
+      <option value="1">1× — như thật</option>
+      <option value="2" selected>2× — chậm lại</option>
+      <option value="4">4× — rất chậm</option>
+      <option value="8">8× — soi từng bước</option>
+    </select>
+  </label>
+
+  <button id="btnReplay" class="demo-btn demo-btn-primary" type="button">Phát lại hiệu ứng</button>
+  <button id="btnTheme" class="demo-btn" type="button">Giao diện: Tối</button>
+  <button id="btnMotion" class="demo-btn" type="button">Thử giảm chuyển động</button>
+</div>
+
+<div id="motionWarn" class="demo-warn" hidden>
+  Máy bạn đang bật <b>giảm chuyển động</b> ở hệ điều hành, nên bình thường mọi hiệu ứng sẽ bị tắt.
+  Trang demo này đang <b>bật cưỡng bức</b> để bạn xem được. Bấm “Thử giảm chuyển động” để thấy
+  trạng thái mà khách của bạn sẽ gặp.
+</div>
+
+<!-- ============================ 0. NỀN AURA ============================ -->
+<section class="aura-bg demo-aura">
+  <div class="aura-layer-1"></div>
+  <div class="aura-layer-2"></div>
+  <div class="aura-layer-3"></div>
+
+  <div class="aura-content demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>00 · Nền Aura — ma trận chấm + hai quầng blur</p>
+
+    <h1 class="demo-h1" data-fx-reveal style="--i:1">
+      Chúng tôi làm<br>
+      <span class="demo-type" data-fx-type='["website doanh nghiệp","website bán hàng","landing page","web app quản lý"]' data-fx-type-speed="65" data-fx-type-pause="1500"></span>
+    </h1>
+
+    <p class="demo-lead" data-fx-reveal style="--i:2">
+      Chấm tròn 1px lưới 20px trôi liên tục. Hai quầng sáng blur 175px và 138px
+      (252px và 198px trên màn hình lớn) trôi ngược chiều nhau, trộn theo chế độ screen.
+    </p>
+  </div>
+</section>
+
+<!-- ============================ 1. HERO ============================ -->
+<section class="demo-sec" data-fx-hover-bg>
+  <div class="fx-bg" aria-hidden="true">
+    <div class="fx-grid"></div>
+    <div class="fx-wave fx-wave-a"></div>
+    <div class="fx-wave fx-wave-b"></div>
+    <div class="fx-scanline"></div>
+  </div>
+
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>01 · Nền động 4 lớp + chữ karaoke</p>
+
+    <h1 class="demo-h1" data-fx-reveal style="--i:1">
+      Website <span class="fx-karaoke">đúng nhu cầu</span><span class="fx-caret"></span>
+    </h1>
+
+    <p class="demo-lead" data-fx-words>
+      Lưới kỹ thuật trôi 20 giây, quầng sáng thở 9 giây, vệt quét dọc 7 giây. Rê chuột vào vùng này để thấy quầng sáng đậm lên.
+    </p>
+
+    <div class="demo-stats" data-fx-reveal style="--i:3">
+      <div><span data-fx-count="244" data-fx-count-suffix="+"></span><small>Con số đếm tăng dần</small></div>
+      <div><span data-fx-count="36"></span><small>Chỉ dùng cho số liệu thật</small></div>
+      <div><span data-fx-count="12" data-fx-count-suffix=" năm"></span><small>Không bịa thành tích</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 2. SPOTLIGHT ============================ -->
+<section class="demo-sec demo-sec-alt">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>02 · Vệt sáng đi theo con trỏ</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Di chuột trong khung dưới đây</h2>
+
+    <div class="demo-spot" data-fx-spotlight>
+      <span>Vệt sáng 500px bám theo con trỏ, hiện/ẩn trong 300ms</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 3. TRÔI LƠ LỬNG ============================ -->
+<section class="demo-sec">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>03 · Năm quỹ đạo trôi lệch pha</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Chu kỳ 12 đến 18 giây</h2>
+
+    <div class="demo-floats">
+      <span class="demo-chip fx-float-1">React</span>
+      <span class="demo-chip fx-float-2">Tailwind</span>
+      <span class="demo-chip fx-float-3">WordPress</span>
+      <span class="demo-chip fx-float-4">REST API</span>
+      <span class="demo-chip fx-float-5">Vite</span>
+      <span class="demo-chip fx-float-soft">SEO</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 4. THẺ + HIỆN DẦN ============================ -->
+<section class="demo-sec demo-sec-alt">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>04 · Hiện dần khi cuộn + hover thẻ</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Mỗi thẻ lệch nhau 80ms</h2>
+
+    <div class="demo-grid">
+      <article class="fx-card demo-card" data-fx-reveal style="--i:0">
+        <h3>Viền sáng lên</h3>
+        <p>Rê chuột vào thẻ: viền chuyển sang màu brand, nền đậm thêm một chút.</p>
+      </article>
+      <article class="fx-card demo-card" data-fx-reveal style="--i:1">
+        <h3>Nhấc 2px</h3>
+        <p>Dịch lên 2px kèm đổ bóng. Đủ để cảm nhận, không đủ để giật mình.</p>
+      </article>
+      <article class="fx-card demo-card" data-fx-reveal style="--i:2">
+        <h3>Đúng 200ms</h3>
+        <p>Nhanh hơn thì cộc, chậm hơn thì ì. Toàn site dùng chung một con số.</p>
+      </article>
+    </div>
+
+    <div class="demo-grid demo-grid-2">
+      <div class="demo-card" data-fx-reveal data-fx-reveal-variant="left">
+        <span class="demo-tag">fx-reveal-left</span> Trượt vào từ trái
+      </div>
+      <div class="demo-card fx-reveal-right" data-fx-reveal>
+        <span class="demo-tag">fx-reveal-right</span> Trượt vào từ phải
+      </div>
+      <div class="demo-card fx-reveal-zoom" data-fx-reveal>
+        <span class="demo-tag">fx-reveal-zoom</span> Phóng nhẹ từ 96%
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 5. MARQUEE ============================ -->
+<section class="demo-sec">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>05 · Băng chạy vô hạn</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Rê chuột vào để dừng lại</h2>
+  </div>
+
+  <div class="fx-marquee demo-marquee" data-fx-marquee="28s">
+    <div class="fx-marquee-track">
+      <span class="demo-pill">Website doanh nghiệp</span>
+      <span class="demo-pill">Website bán hàng</span>
+      <span class="demo-pill">Landing Page</span>
+      <span class="demo-pill">Web App</span>
+      <span class="demo-pill">Tối ưu tốc độ</span>
+      <span class="demo-pill">Bàn giao có hướng dẫn</span>
+    </div>
+  </div>
+
+  <div class="fx-marquee demo-marquee" data-fx-marquee="34s" data-fx-marquee-reverse>
+    <div class="fx-marquee-track">
+      <span class="demo-pill demo-pill-ghost">React</span>
+      <span class="demo-pill demo-pill-ghost">Tailwind</span>
+      <span class="demo-pill demo-pill-ghost">WordPress headless</span>
+      <span class="demo-pill demo-pill-ghost">REST API</span>
+      <span class="demo-pill demo-pill-ghost">Vite</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 6. ACCORDION ============================ -->
+<section class="demo-sec demo-sec-alt">
+  <div class="demo-wrap demo-wrap-narrow">
+    <p class="demo-eyebrow" data-fx-reveal>06 · Accordion</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">Giãn theo chiều cao thật</h2>
+
+    <div class="demo-acc" data-fx-accordion>
+      <div data-fx-acc-item class="demo-acc-item">
+        <button class="fx-acc-trigger demo-acc-btn" type="button">
+          Vì sao không dùng thư viện animation?
+          <svg class="fx-acc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="fx-acc-panel"><div class="demo-acc-body">
+          Toàn bộ hiệu ứng ở đây là <code>@keyframes</code> và IntersectionObserver. Không GSAP,
+          không AOS, không Framer Motion. Nhẹ hơn và không phụ thuộc bản cập nhật của bên thứ ba.
+        </div></div>
+      </div>
+
+      <div data-fx-acc-item class="demo-acc-item">
+        <button class="fx-acc-trigger demo-acc-btn" type="button">
+          Vì sao chu kỳ animation lại dài như vậy?
+          <svg class="fx-acc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="fx-acc-panel"><div class="demo-acc-body">
+          Nền chuyển động 7 đến 22 giây một vòng. Đủ để trang có sức sống, không đủ để cướp
+          sự chú ý khỏi nội dung. Đây là ranh giới giữa "sang" và "rối".
+        </div></div>
+      </div>
+
+      <div data-fx-acc-item class="demo-acc-item">
+        <button class="fx-acc-trigger demo-acc-btn" type="button">
+          Vì sao blur chỉ 54px?
+          <svg class="fx-acc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="fx-acc-panel"><div class="demo-acc-body">
+          Blur càng lớn trình duyệt càng phải vẽ lại nhiều mỗi khung hình. 54px đã đủ mềm cho
+          quầng sáng, trong khi 150 đến 250px gây giật rõ khi trang có hiệu ứng theo cuộn.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 7. BẢNG MÀU ============================ -->
+<section class="demo-sec">
+  <div class="demo-wrap">
+    <p class="demo-eyebrow" data-fx-reveal>07 · Bảng màu lấy từ logo</p>
+    <h2 class="demo-h2" data-fx-reveal style="--i:1">#0073EA — hsl(210.5 100% 45.9%)</h2>
+
+    <div class="demo-swatches" data-fx-reveal style="--i:2">
+      <div><i style="background:#F0F7FF"></i><b>50</b></div>
+      <div><i style="background:#DBEDFF"></i><b>100</b></div>
+      <div><i style="background:#A3D0FF"></i><b>200</b></div>
+      <div><i style="background:#5CABFF"></i><b>300</b></div>
+      <div><i style="background:#248EFF"></i><b>400</b></div>
+      <div><i style="background:#0073EA"></i><b>500</b></div>
+      <div><i style="background:#005EC2"></i><b>600</b></div>
+      <div><i style="background:#004A99"></i><b>700</b></div>
+      <div><i style="background:#003B7A"></i><b>800</b></div>
+      <div><i style="background:#002C5C"></i><b>900</b></div>
+      <div><i style="background:#001B38"></i><b>950</b></div>
+    </div>
+
+    <p class="demo-note" data-fx-reveal style="--i:3">
+      Logo không phải một màu phẳng mà là gradient sáu điểm dừng, từ cyan
+      <code>#03D0FF</code> sang xanh đậm <code>#0073EA</code>. Đây là thứ khiến
+      giao diện khớp logo chứ không chỉ "cùng màu xanh".
+    </p>
+
+    <div class="demo-grad" data-fx-reveal style="--i:4"></div>
+
+    <p class="demo-row" data-fx-reveal style="--i:5">
+      <a class="demo-btn demo-btn-brand" href="#">Nút mang gradient logo</a>
+      <span class="demo-note">rê chuột để thấy nền trượt về đầu cyan</span>
+    </p>
+  </div>
+</section>
+
+<footer class="demo-foot">
+  <p>Bộ hiệu ứng viết lại theo kỹ thuật khảo sát từ ximitech.vn, dùng bảng màu Anmitech.</p>
+  <p class="demo-note">Bật "giảm chuyển động" ở hệ điều hành, hoặc bấm nút ở đầu trang, để xem trạng thái dự phòng.</p>
+</footer>

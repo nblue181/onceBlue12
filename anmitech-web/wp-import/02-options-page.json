@@ -1,0 +1,22 @@
+[
+	{
+		"key": "ui_options_page_anmitech",
+		"title": "Anmitech",
+		"menu_slug": "anmitech-options",
+		"parent_slug": "",
+		"advanced_configuration": true,
+		"page_title": "Anmitech — Cấu hình",
+		"menu_title": "Anmitech",
+		"description": "",
+		"capability": "manage_options",
+		"position": "20",
+		"icon_url": "dashicons-admin-site-alt3",
+		"redirect": false,
+		"post_id": "options",
+		"autoload": true,
+		"update_button": "Lưu",
+		"updated_message": "Đã lưu cấu hình.",
+		"menu_order": 0,
+		"active": true
+	}
+]

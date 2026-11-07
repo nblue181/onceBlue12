@@ -1,0 +1,953 @@
+[
+    {
+        "key": "group_anmi_options",
+        "title": "Cấu hình chung",
+        "fields": [
+            {
+                "key": "field_anmi_opt_tab_brand",
+                "label": "Thương hiệu",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_opt_brand",
+                "label": "Tên thương hiệu",
+                "name": "brand_name",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "34",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Anmitech",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_tagline",
+                "label": "Tagline",
+                "name": "tagline",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_domain",
+                "label": "Tên miền hiển thị",
+                "name": "domain",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "33",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "anmitech.vn",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_footer_desc",
+                "label": "Mô tả ở footer",
+                "name": "footer_desc",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 2,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_opt_logo",
+                "label": "Logo",
+                "name": "logo",
+                "type": "image",
+                "instructions": "Bản màu, dùng trên nền sáng.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "thumbnail"
+            },
+            {
+                "key": "field_anmi_opt_logo_light",
+                "label": "Logo bản trắng (cho nền tối)",
+                "name": "logo_light",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "thumbnail"
+            },
+            {
+                "key": "field_anmi_opt_tab_contact",
+                "label": "Liên hệ",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_opt_zalo_phone",
+                "label": "Số Zalo",
+                "name": "zalo_phone",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_zalo_url",
+                "label": "Link Zalo",
+                "name": "zalo_url",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "https://zalo.me/"
+            },
+            {
+                "key": "field_anmi_opt_messenger",
+                "label": "Link Messenger",
+                "name": "messenger_url",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "https://m.me/"
+            },
+            {
+                "key": "field_anmi_opt_hotline",
+                "label": "Hotline",
+                "name": "hotline",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_email",
+                "label": "Email",
+                "name": "email",
+                "type": "email",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_hours",
+                "label": "Thời gian làm việc",
+                "name": "working_hours",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_address",
+                "label": "Địa chỉ / khu vực",
+                "name": "address",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_tab_home",
+                "label": "Trang chủ",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_opt_hero_eyebrow",
+                "label": "Hero — eyebrow",
+                "name": "hero_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_hero_title",
+                "label": "Hero — tiêu đề H1",
+                "name": "hero_title",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 2,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_opt_hero_karaoke",
+                "label": "Hero — cụm được làm nổi",
+                "name": "hero_karaoke",
+                "type": "text",
+                "instructions": "Cụm từ này chạy hiệu ứng karaoke. Chỉ một cụm duy nhất trong H1.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_hero_type",
+                "label": "Hero — các cụm đánh chữ",
+                "name": "hero_typewriter",
+                "type": "repeater",
+                "instructions": "Frontend gõ lần lượt từng cụm rồi lặp lại.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Thêm cụm",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_opt_type_text",
+                        "label": "Nội dung",
+                        "name": "text",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_opt_hero_type"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_opt_hero_desc",
+                "label": "Hero — mô tả",
+                "name": "hero_desc",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 3,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_opt_hero_micro",
+                "label": "Hero — microcopy dưới nút",
+                "name": "hero_note",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_about_eyebrow",
+                "label": "Giới thiệu — eyebrow",
+                "name": "about_eyebrow",
+                "type": "text",
+                "instructions": "Nhãn nhỏ in hoa phía trên tiêu đề.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "VỀ ANMITECH",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_about_title",
+                "label": "Giới thiệu — tiêu đề H2",
+                "name": "about_title",
+                "type": "textarea",
+                "instructions": "Một câu. Đây là H2 đầu tiên của trang, nên chứa từ khoá chính.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "70",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 2,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_opt_about_desc",
+                "label": "Giới thiệu — nội dung",
+                "name": "about_desc",
+                "type": "textarea",
+                "instructions": "Hai đến ba câu. Đoạn này chạy hiệu ứng hiện từng từ nên đừng viết quá dài.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 4,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_opt_about_image",
+                "label": "Giới thiệu — ảnh",
+                "name": "about_image",
+                "type": "image",
+                "instructions": "Ảnh bên cạnh đoạn giới thiệu. Để trống thì phần chữ chiếm toàn bộ chiều ngang.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "thumbnail"
+            },
+            {
+                "key": "field_anmi_opt_about_chips",
+                "label": "Chip công nghệ / từ khoá",
+                "name": "about_chips",
+                "type": "repeater",
+                "instructions": "Cụm nhãn trôi lơ lửng bên cạnh đoạn giới thiệu. CHỈ hiện khi Ảnh ở trên để trống — có ảnh thì ảnh được ưu tiên. Khoảng 6 nhãn là vừa; nhiều hơn sẽ rối.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 8,
+                "collapsed": "",
+                "button_label": "Thêm nhãn",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_opt_chip_label",
+                        "label": "Nội dung",
+                        "name": "label",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": 24,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_opt_about_chips"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_opt_about_link_label",
+                "label": "Giới thiệu — nhãn liên kết",
+                "name": "about_link_label",
+                "type": "text",
+                "instructions": "Ví dụ: Tìm hiểu về Anmitech. Để trống thì không hiện liên kết.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_about_link_url",
+                "label": "Giới thiệu — liên kết",
+                "name": "about_link_url",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "/gioi-thieu/"
+            },
+            {
+                "key": "field_anmi_opt_values",
+                "label": "Giá trị cốt lõi",
+                "name": "values",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "row",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Thêm giá trị",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_opt_val_icon",
+                        "label": "Icon",
+                        "name": "icon",
+                        "type": "select",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "20",
+                            "class": "",
+                            "id": ""
+                        },
+                        "choices": {
+                            "eye": "Con mắt",
+                            "chat": "Trò chuyện",
+                            "heart": "Trái tim",
+                            "square": "Ô tích",
+                            "target": "Mục tiêu"
+                        },
+                        "default_value": "",
+                        "return_format": "value",
+                        "multiple": 0,
+                        "allow_null": 1,
+                        "ui": 0,
+                        "ajax": 0,
+                        "placeholder": "",
+                        "parent_repeater": "field_anmi_opt_values"
+                    },
+                    {
+                        "key": "field_anmi_opt_val_title",
+                        "label": "Tiêu đề",
+                        "name": "title",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_opt_values"
+                    },
+                    {
+                        "key": "field_anmi_opt_val_desc",
+                        "label": "Mô tả",
+                        "name": "desc",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_opt_values"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_opt_stats",
+                "label": "Số liệu",
+                "name": "stats",
+                "type": "repeater",
+                "instructions": "CHỈ điền số liệu có thật. Không có thì để trống, đừng bịa.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Thêm số liệu",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_opt_stat_num",
+                        "label": "Con số",
+                        "name": "number",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "20",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "min": "",
+                        "max": "",
+                        "step": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_opt_stats"
+                    },
+                    {
+                        "key": "field_anmi_opt_stat_suffix",
+                        "label": "Hậu tố",
+                        "name": "suffix",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "15",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "+",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_opt_stats"
+                    },
+                    {
+                        "key": "field_anmi_opt_stat_label",
+                        "label": "Nhãn",
+                        "name": "label",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_opt_stats"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_opt_process_eyebrow",
+                "label": "Quy trình — eyebrow",
+                "name": "process_eyebrow",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "CÁCH LÀM VIỆC",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_process_title",
+                "label": "Quy trình — tiêu đề H2",
+                "name": "process_title",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "70",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 2,
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_anmi_opt_process",
+                "label": "Quy trình — các bước",
+                "name": "process",
+                "type": "repeater",
+                "instructions": "Mỗi dòng là một bước. Frontend tự đánh số theo thứ tự, không cần nhập số.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "row",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Thêm bước",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_anmi_opt_proc_title",
+                        "label": "Tên bước",
+                        "name": "title",
+                        "type": "text",
+                        "instructions": "Ví dụ: Hiểu doanh nghiệp.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_opt_process"
+                    },
+                    {
+                        "key": "field_anmi_opt_proc_desc",
+                        "label": "Mô tả",
+                        "name": "desc",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_anmi_opt_process"
+                    }
+                ]
+            },
+            {
+                "key": "field_anmi_opt_tab_cta",
+                "label": "CTA",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_anmi_opt_cta_title",
+                "label": "CTA — tiêu đề",
+                "name": "cta_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_anmi_opt_cta_desc",
+                "label": "CTA — mô tả",
+                "name": "cta_desc",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "rows": 2,
+                "placeholder": "",
+                "new_lines": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "anmitech-options"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 1
+    }
+]

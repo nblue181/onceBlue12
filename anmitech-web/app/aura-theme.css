@@ -1,0 +1,32 @@
+/* =========================================================================
+   ANMITECH — Ghi đè biến nền Aura.
+
+   File này PHẢI nạp sau effects.css (xem app/layout.jsx). effects.css khai giá
+   trị gốc ở `:root, html[data-theme="dark"]` với cùng độ ưu tiên, nên chỉ thứ
+   tự nạp quyết định bên nào thắng.
+
+   Tách riêng chứ không gộp vào globals.css: globals.css chứa @tailwind, phải
+   nạp trước effects.css để hiệu ứng ghi đè được utility — mà như vậy thì phần
+   ghi đè biến nằm trong đó sẽ bị effects.css đè lại.
+   ====================================================================== */
+
+/* Nền một màu.
+
+   effects.css để --aura-glow-2 là cyan #03D0FF. Đổi về cùng họ xanh dương vì
+   docs/BRAND-TOKENS.md đã cảnh báo: cyan ở hue 191° nằm rất gần màu chủ đạo của
+   XimiTech (195°), lấy nó làm quầng nền lớn thì nền đọc ra là XimiTech.
+
+   Cyan vẫn giữ nguyên vai trò điểm nhấn nhỏ ở .fx-btn-brand và .fx-text-brand —
+   đó là đầu sáng của gradient logo, không bỏ được. */
+:root,
+html[data-theme='dark'] {
+  --aura-glow-2: hsl(var(--brand-400) / 0.28);
+  --aura-sweep: hsl(var(--brand-400) / 0.16);
+}
+
+html[data-theme='light'] {
+  --aura-glow-2: hsl(var(--brand) / 0.12);
+  /* Nền sáng dùng mix-blend-mode: multiply, màu đậm lên rất nhanh — alpha phải
+     thấp hơn hẳn bản tối, nếu không vệt sáng thành vệt bẩn xám trên nền trắng. */
+  --aura-sweep: hsl(var(--brand) / 0.07);
+}

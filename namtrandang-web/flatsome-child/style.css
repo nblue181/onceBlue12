@@ -1,0 +1,14 @@
+/*
+Theme Name:   Nam làm WEB — Flatsome Child
+Theme URI:    https://namtrandang.com
+Description:  Child theme của Flatsome cho namtrandang.com. Chứa design tokens, component CSS, CPT project/service, field group SCF (repeater/gallery/relationship), Options Page và các shortcode section dùng trong UX Builder.
+Author:       Nam làm WEB
+Author URI:   https://namtrandang.com
+Template:     flatsome
+Version:      1.0.0
+Text Domain:  nlw
+*/
+
+/* Không viết CSS ở đây.
+   Toàn bộ CSS nằm trong assets/css/tokens.css và assets/css/theme.css,
+   được enqueue trong inc/setup.php để kiểm soát thứ tự nạp so với Flatsome. */
